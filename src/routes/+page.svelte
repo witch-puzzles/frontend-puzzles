@@ -1,4 +1,6 @@
 <script lang="ts">
+  import Button from "@smui/button";
+  import Textfield from "@smui/textfield";
   import { initializeApp } from "firebase/app";
   import {
     getAuth,
@@ -31,13 +33,13 @@
   connectAuthEmulator(auth, `http://127.0.0.1:${authEmulatorPort}`);
 
   const setStatusSuccessStyle = () => {
-    statusElement.classList.remove("text-red-700");
-    statusElement.classList.add("text-green-700");
+    //statusElement.classList.add("status-success");
+    //statusElement.classList.remove("status-error");
   };
 
   const statusError = (error) => {
-    statusElement.classList.add("text-red-700");
-    statusElement.classList.remove("text-green-700");
+    //statusElement.classList.add("status-error");
+    //statusElement.classList.remove("status-success");
     statusText = `Error! ${error.code} See console for more info`;
     console.error(error);
   };
@@ -80,38 +82,24 @@
 </script>
 
 <div class="vertical-flex">
-  <h1>Welcome to Witch Puzzles Dummy Auth UI!</h1>
+  <h1 class="mdc-typography--headline4">
+    Welcome to Witch Puzzles Dummy Auth UI!
+  </h1>
   <div class="vertical-flex">
-    <input type="text" placeholder="Email" bind:value={emailInput} />
-    <input type="text" placeholder="Password" bind:value={passwordInput} />
+    <Textfield label="Email" bind:value={emailInput} required />
+    <Textfield label="Password" bind:value={passwordInput} required />
   </div>
   <div>
-    <button onclick={register}>Register</button>
-    <button onclick={signIn}>Sign in</button>
+    <Button onclick={register}>Register</Button>
+    <Button onclick={signIn}>Sign in</Button>
   </div>
-  <p bind:this={statusElement} class="status">
+  <p bind:this={statusElement}>
     Status: {statusText}
   </p>
 </div>
 
-<style lang="postcss">
-  h1 {
-    @apply font-extrabold text-2xl;
-  }
-
-  button {
-    @apply p-1 text-white bg-orange-500 border-2 border-black;
-  }
-
-  input {
-    @apply p-1 border-2 border-black;
-  }
-
+<style lang="scss">
   .vertical-flex {
     @apply flex flex-col items-center gap-2;
-  }
-
-  .status {
-    @apply font-bold text-lg;
   }
 </style>
