@@ -8,8 +8,11 @@ assignees: ''
 ---
 <!-- You do not have to follow the template strictly, but please give as much detail and context as possible. -->
 
-**Describe the feature**
+## Description
 <!-- A clear and concise description of what the feature is. -->
 
-**Additional context**
+## Additional Context
 <!-- Add any other context or screenshots about the feature request here. -->
+
+## Acceptance Criteria
+<!-- The criteria that must be met to close the issue. -->
