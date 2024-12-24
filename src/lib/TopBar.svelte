@@ -1,19 +1,18 @@
 <script>
-    import { goto } from '$app/navigation'; // Import SvelteKit's navigation function
+    import { goto } from '$app/navigation';
     import Button from './Button.svelte';
   
-    // Props to determine logged-in state
     export let isLoggedIn = false;
   
   </script>
   
   <div class="topbar">
-    <!-- Logo Section -->
+
     <div class="logo" on:click={() => goto('/landing')} style="cursor: pointer;">
       <img src="/images/WitchPuzzleLogo.png" alt="WithPuzzles Logo" />
     </div>
   
-    <!-- Buttons Section -->
+
     <div class="buttons">
       {#if isLoggedIn}
         <Button text="Leaderboard" type="primary" on:click={() => goto('/leaderboard')} />
