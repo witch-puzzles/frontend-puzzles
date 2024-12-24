@@ -1,34 +1,33 @@
 <script>
-    import Button from '../../lib/Button.svelte'; // Reuse the updated Button component
+    import Button from '../../lib/Button.svelte';
   </script>
   
   <div class="login-container">
-    <!-- Login Form -->
+
     <div class="login-form">
       <h1>Log in</h1>
   
-      <!-- Email Input -->
+
       <div class="input-container">
         <input type="email" placeholder="Email" />
       </div>
   
-      <!-- Password Input -->
+
       <div class="input-container">
         <input type="password" placeholder="Password" />
       </div>
   
-      <!-- Forgot Password -->
       <div class="forgot-password">
         <a href="/forgot-password">Forgot your password?</a>
       </div>
   
-      <!-- Login Button -->
-      <Button text="Log in" type="primary" fontSize="30px" />
+      <div class="login-button">
+          <Button text="Log in" type="primary" fontSize="30px" />
+      </div>
+      
   
-      <!-- Divider -->
       <div class="divider">or continue with</div>
   
-      <!-- Google Login -->
       <div class="google-login">
         <img src="/images/google_logo.png" alt="Google Login" />
       </div>
@@ -59,7 +58,13 @@
       color: #212121;
       margin-bottom: 20px;
     }
-  
+
+    .login-button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     .input-container {
       margin-bottom: 30px;
     }
@@ -69,14 +74,14 @@
       padding: 15px;
       font-size: 22px;
       font-family: 'Inter', sans-serif;
-      font-weight: 600; /* Make placeholder semi-bold */
+      font-weight: 600;
       border: 4px solid #000000;
       border-radius: 14px;
       outline: none;
     }
   
     .input-container input::placeholder {
-      font-weight: 600; /* Make placeholder text semi-bold */
+      font-weight: 600;
     }
   
     .forgot-password {
@@ -87,7 +92,7 @@
     .forgot-password a {
       font-family: 'Inter', sans-serif;
       font-size: 14px;
-      font-weight: 600; /* Make "forgot password" text semi-bold */
+      font-weight: 600;
       color: #212121;
       text-decoration: none;
     }

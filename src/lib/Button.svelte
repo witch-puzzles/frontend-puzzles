@@ -1,8 +1,8 @@
 <script>
     export let text = '';
-    export let type = 'primary'; // 'primary', 'secondary', or 'image'
-    export let imageSrc = ''; // For the image button
-    export let fontSize = '16px'; // The font size determines the size of the button
+    export let type = 'primary';
+    export let imageSrc = '';
+    export let fontSize = '16px';
   </script>
   
   <button
@@ -32,7 +32,6 @@
       transition: all 0.2s;
     }
   
-    /* Primary Button */
     .button.primary {
       background-color: #f88912;
       color: #fcfcfc;
@@ -42,7 +41,6 @@
       background-color: #e07810;
     }
   
-    /* Secondary Button */
     .button.secondary {
       background-color: transparent;
       color: #212121;
@@ -53,7 +51,6 @@
       color: #000000;
     }
   
-    /* Image Button */
     .button.image {
       background-size: cover;
       background-position: center;
