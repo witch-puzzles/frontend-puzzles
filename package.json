@@ -13,7 +13,7 @@
 	},
 	"devDependencies": {
 		"@material/typography": "^14.0.0",
-		"@smui/button": "8.0.0-beta.0",
+		"@smui/button": "^8.0.0-beta.0",
 		"@smui/common": "8.0.0-beta.0",
 		"@smui/segmented-button": "8.0.0-beta.3",
 		"@smui/textfield": "8.0.0-beta.0",
@@ -29,6 +29,8 @@
 		"vite": "^5.0.3"
 	},
 	"dependencies": {
+		"@smui/icon-button": "^8.0.0-beta.3",
+		"@smui/top-app-bar": "^8.0.0-beta.3",
 		"firebase": "^11.0.2"
 	}
 }
