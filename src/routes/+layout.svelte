@@ -1,6 +1,11 @@
-<script lang="ts">
+<script>
 	import '../app.css';
-	let { children } = $props();
-</script>
-
-{@render children()}
+	import TopBar from '../lib/TopBar.svelte';
+  
+	let isLoggedIn = false;
+  </script>
+  
+  <TopBar {isLoggedIn} />
+  
+  <slot />
+  
