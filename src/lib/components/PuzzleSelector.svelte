@@ -3,6 +3,7 @@
   import SegmentedButton, { Segment } from "@smui/segmented-button";
   import type Puzzle from "$lib/Puzzle";
   import { PuzzleDifficulty } from "$lib/Puzzle";
+  import PuzzleCard from "./PuzzleCard.svelte";
 
   interface Props {
     puzzles: Puzzle[];
@@ -40,7 +41,7 @@
         <Button variant="raised"><Label>{puzzle.name}</Label></Button>
       {:else}
         <Button onclick={() => handleSelectPuzzle(puzzle)}
-          ><Label>{puzzle.name}</Label></Button
+          ><PuzzleCard {puzzle} /></Button
         >
       {/if}
     {/each}
