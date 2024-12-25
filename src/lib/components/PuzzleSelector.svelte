@@ -1,9 +1,9 @@
 <script lang="ts">
   import Button, { Label } from "@smui/button";
-  import SegmentedButton, { Segment } from "@smui/segmented-button";
   import type Puzzle from "$lib/Puzzle";
   import { PuzzleDifficulty } from "$lib/Puzzle";
   import PuzzleCard from "./PuzzleCard.svelte";
+  import DifficultySelector from "./DifficultySelector.svelte";
 
   interface Props {
     puzzles: Puzzle[];
@@ -24,17 +24,10 @@
 </script>
 
 <div class="flex flex-col items-center gap-4">
-  <div>
-    <SegmentedButton
-      segments={selectedPuzzle.availableDifficulties}
-      singleSelect
-      bind:selected={selectedDifficulty}
-    >
-      {#snippet segment(segment)}
-        <Segment {segment}><Label>{PuzzleDifficulty[segment]}</Label></Segment>
-      {/snippet}
-    </SegmentedButton>
-  </div>
+  <DifficultySelector
+    difficulties={selectedPuzzle.availableDifficulties}
+    bind:selectedDifficulty
+  />
   <div>
     {#each puzzles as puzzle (puzzle)}
       {#if puzzle === selectedPuzzle}
@@ -47,3 +40,6 @@
     {/each}
   </div>
 </div>
+
+<style lang="postcss">
+</style>
