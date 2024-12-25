@@ -21,6 +21,9 @@ importers:
       '@smui/common':
         specifier: 8.0.0-beta.0
         version: 8.0.0-beta.0(svelte@5.2.3)(typescript@5.6.3)
+      '@smui/segmented-button':
+        specifier: 8.0.0-beta.3
+        version: 8.0.0-beta.3
       '@smui/textfield':
         specifier: 8.0.0-beta.0
         version: 8.0.0-beta.0(svelte@5.2.3)(typescript@5.6.3)
@@ -483,6 +486,9 @@ packages:
   '@material/rtl@14.0.0':
     resolution: {integrity: sha512-xl6OZYyRjuiW2hmbjV2omMV8sQtfmKAjeWnD1RMiAPLCTyOW9Lh/PYYnXjxUrNa0cRwIIbOn5J7OYXokja8puA==}
 
+  '@material/segmented-button@14.0.0':
+    resolution: {integrity: sha512-6es7PPNX3T3h7bOLyb8L38hMoTXqBs5XX8XCKycKZG2Dm4stac/yYMKKO/q3MOn36t37s+JAVTjyRB8HnJu5Gg==}
+
   '@material/shape@14.0.0':
     resolution: {integrity: sha512-o0mJB0+feOv473KckI8gFnUo8IQAaEA6ynXzw3VIYFjPi48pJwrxa0mZcJP/OoTXrCbDzDeFJfDPXEmRioBb9A==}
 
@@ -728,6 +734,9 @@ packages:
   '@smui/common@8.0.0-beta.0':
     resolution: {integrity: sha512-Sd2vkB0Xe0EF39L/g3OpGXUAikj7hMctkm5Hc97yoMkfUYBD8lxf5PaTu/8x7QwWIZU91K5yCGgW2lb9nM0OIQ==}
 
+  '@smui/common@8.0.0-beta.3':
+    resolution: {integrity: sha512-j4XE0cGn1O4PgfAFyemNE6KQicnjOUnSb+gWD52GJntatBEhszz1GdaKUTIF4oxM/V7RW5nSX2xzrilPytLEwg==}
+
   '@smui/floating-label@8.0.0-beta.0':
     resolution: {integrity: sha512-hc7w377Q9LtAQpw2uKz3G90nobWoiGHXpsVFjvcFbv/B3bw51nRYbrzCZWz/Ua4vSYY06pSZ1tddA7le04EIQg==}
 
@@ -739,6 +748,12 @@ packages:
 
   '@smui/ripple@8.0.0-beta.0':
     resolution: {integrity: sha512-kHYhCI3CC+/k8cNnaAyo5i8jKIrje2lfzu7sz825KQfc6yrG2cEaidgrPksgIgGEnLjdh2TlOFXjpxpC8DMPUg==}
+
+  '@smui/ripple@8.0.0-beta.3':
+    resolution: {integrity: sha512-4CCrNNuj7a0DD4LmR1SRT9TsDyP529bbbIzS3C3f0fcJvH5cQfvGjf/jkcz0nK2alMqbCKA3CEC3SZ3D9o3bRg==}
+
+  '@smui/segmented-button@8.0.0-beta.3':
+    resolution: {integrity: sha512-Vj+s5zk3YbzyH5B8DvlurkRc4afls99AYKE/ONvQX7G1fA+m0lqeJ57KgRxGH2Snf1t5EAd36agAXTXtfFvpow==}
 
   '@smui/textfield@8.0.0-beta.0':
     resolution: {integrity: sha512-+UiaouphNsiSuo8uzAaeXC55eBOYplh8LaMXJsaRIn3U2XmBZdPmacYoTuTT9fFcUvERcjVoAT2G5dWEiyskaw==}
@@ -2034,6 +2049,17 @@ snapshots:
       '@material/theme': 14.0.0
       tslib: 2.8.1
 
+  '@material/segmented-button@14.0.0':
+    dependencies:
+      '@material/base': 14.0.0
+      '@material/elevation': 14.0.0
+      '@material/feature-targeting': 14.0.0
+      '@material/ripple': 14.0.0
+      '@material/theme': 14.0.0
+      '@material/touch-target': 14.0.0
+      '@material/typography': 14.0.0
+      tslib: 2.8.1
+
   '@material/shape@14.0.0':
     dependencies:
       '@material/feature-targeting': 14.0.0
@@ -2259,6 +2285,10 @@ snapshots:
       - svelte
       - typescript
 
+  '@smui/common@8.0.0-beta.3':
+    dependencies:
+      '@material/dom': 14.0.0
+
   '@smui/floating-label@8.0.0-beta.0(svelte@5.2.3)(typescript@5.6.3)':
     dependencies:
       '@material/floating-label': 14.0.0
@@ -2296,6 +2326,20 @@ snapshots:
     transitivePeerDependencies:
       - svelte
       - typescript
+
+  '@smui/ripple@8.0.0-beta.3':
+    dependencies:
+      '@material/dom': 14.0.0
+      '@material/ripple': 14.0.0
+      '@smui/common': 8.0.0-beta.3
+
+  '@smui/segmented-button@8.0.0-beta.3':
+    dependencies:
+      '@material/base': 14.0.0
+      '@material/ripple': 14.0.0
+      '@material/segmented-button': 14.0.0
+      '@smui/common': 8.0.0-beta.3
+      '@smui/ripple': 8.0.0-beta.3
 
   '@smui/textfield@8.0.0-beta.0(svelte@5.2.3)(typescript@5.6.3)':
     dependencies:
