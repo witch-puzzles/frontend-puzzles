@@ -18,6 +18,7 @@
 
   const handleSelectPuzzle = (puzzle: Puzzle) => {
     selectedPuzzle = puzzle;
+    selectedDifficulty = selectedPuzzle.availableDifficulties[0];
   };
 </script>
 
