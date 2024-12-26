@@ -7,8 +7,11 @@
 
   let { size }: Props = $props();
 
+  let selectedTileIndex: number | null = $state(null);
+
   const gridSize = size * size * size * size;
-  let values = $state(new Array(gridSize));
+  let values: string[] = $state(new Array(gridSize));
+  values.fill("");
 
   const splitIntoRows = (array: string[], size: number): string[][] => {
     if (size <= 0) throw new Error("size must be greater than zero");
@@ -23,14 +26,35 @@
 
   const rowSize = size * size;
   const rows = splitIntoRows(values, rowSize);
+
+  const handleTileSelect = (index: number) => {
+    selectedTileIndex = index;
+  };
+
+  const handleTileDeselect = () => {
+    selectedTileIndex = null;
+  };
 </script>
 
-{#each rows as _, h}
-  <div class="flex flex-col">
+<h1>Selected: {selectedTileIndex ?? "not selected"}</h1>
+<h1>
+  Value: {selectedTileIndex !== null
+    ? values[selectedTileIndex]
+    : "not selected"}
+</h1>
+
+<div class="flex flex-col border border-black">
+  {#each rows as _, h}
     <div class="flex flex-row">
       {#each rows as _, w}
-        <SudokuTile value={(h * rowSize + w).toString()} />
+        {@const index = h * rowSize + w}
+        <SudokuTile
+          bind:value={values[index]}
+          isSelected={selectedTileIndex === index}
+          onselect={() => handleTileSelect(index)}
+          ondeselect={handleTileDeselect}
+        />
       {/each}
     </div>
-  </div>
-{/each}
+  {/each}
+</div>
