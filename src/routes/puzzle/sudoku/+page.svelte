@@ -1,1 +1,7 @@
-<h1 class="mdc-typography--headline1">Sudoku Solve Page</h1>
+<script lang="ts">
+  import SudokuGrid from "$lib/components/SudokuGrid.svelte";
+</script>
+
+<div class="flex flex-col items-center">
+  <SudokuGrid size={3} />
+</div>
