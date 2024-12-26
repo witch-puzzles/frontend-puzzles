@@ -36,13 +36,6 @@
   };
 </script>
 
-<h1>Selected: {selectedTileIndex ?? "not selected"}</h1>
-<h1>
-  Value: {selectedTileIndex !== null
-    ? values[selectedTileIndex]
-    : "not selected"}
-</h1>
-
 <div class="flex flex-col border border-black">
   {#each rows as _, h}
     <div class="flex flex-row">

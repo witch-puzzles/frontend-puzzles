@@ -15,10 +15,10 @@
   };
 </script>
 
-<div class="flex flex-row items-center justify-center gap-12">
+<div class="h-dvh flex flex-row items-center justify-center gap-12">
   <div class="flex flex-col items-center">
     <h6 class="mdc-typography--headline6">How to Play</h6>
-    <p>Lorem ipsum dolor sit amet</p>
+    <p>It's Sudoku.</p>
   </div>
   <div class="flex flex-col items-center">
     <h3 class="mdc-typography--headline3">Sudoku</h3>
