@@ -2,6 +2,8 @@
   interface Props {
     value?: string;
     isSelected?: boolean;
+    isHighlighted?: boolean;
+    disabled?: boolean;
     onselect: () => void;
     ondeselect: () => void;
   }
@@ -9,21 +11,21 @@
   const availableKeys = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
   let {
-    value = $bindable("0"),
-    isSelected = $bindable(false),
+    value = $bindable(""),
+    isSelected = false,
+    isHighlighted = false,
+    disabled = false,
     onselect,
     ondeselect,
   }: Props = $props();
 
   const selectSelf = () => {
     isSelected = true;
-    console.log("selected");
     onselect();
   };
 
   const deselectSelf = () => {
     isSelected = false;
-    console.log("deselected");
     ondeselect();
   };
 
@@ -51,8 +53,10 @@
 
 <button
   onclick={handleClick}
-  class="center-value tile inner"
+  {disabled}
+  class="center-value tile"
   class:selected={isSelected}
+  class:highlighted={!isSelected && isHighlighted}
   onkeydown={(e) => setValue(e.key)}
 >
   {value}
@@ -64,14 +68,14 @@
   }
 
   .tile {
-    @apply w-12 h-12;
-  }
-
-  .tile.inner {
-    @apply border border-black;
+    @apply w-12 h-12 border border-black;
   }
 
   .tile.selected {
-    @apply bg-green-100;
+    @apply bg-blue-100;
+  }
+
+  .tile.highlighted {
+    @apply bg-orange-100;
   }
 </style>
