@@ -17,6 +17,7 @@
 
   const reset = () => {
     console.log("Reset puzzle...");
+    values = initialValues;
   };
 
   const shuffle = () => {
