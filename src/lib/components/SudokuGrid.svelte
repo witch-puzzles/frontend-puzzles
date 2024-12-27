@@ -3,15 +3,12 @@
 
   interface Props {
     size: number; // size = 3, for a regular Sudoku grid
+    values: string[];
   }
 
-  let { size }: Props = $props();
+  let { size, values = $bindable([]) }: Props = $props();
 
   let selectedTileIndex: number | null = $state(null);
-
-  const gridSize = size * size * size * size;
-  let values: string[] = $state(new Array(gridSize));
-  values.fill("");
 
   const splitIntoRows = (array: string[], size: number): string[][] => {
     if (size <= 0) throw new Error("size must be greater than zero");
@@ -24,8 +21,8 @@
     return rows;
   };
 
-  const rowSize = size * size;
-  const rows = splitIntoRows(values, rowSize);
+  let rowSize = $derived(size * size);
+  let rows = $derived(splitIntoRows(values, rowSize));
 
   const handleTileSelect = (index: number) => {
     selectedTileIndex = index;
