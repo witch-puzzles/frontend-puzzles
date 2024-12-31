@@ -3,10 +3,15 @@
 
   interface Props {
     size: number; // size = 3, for a regular Sudoku grid
+    initialValues: string[];
     values: string[];
   }
 
-  let { size, values = $bindable([]) }: Props = $props();
+  let {
+    size,
+    initialValues,
+    values = $bindable(initialValues),
+  }: Props = $props();
 
   let selectedTileIndex: number | null = $state(null);
 
@@ -91,7 +96,7 @@
           bind:value={values[index]}
           isSelected={selectedTileIndex === index}
           isHighlighted={isHighlighted(index)}
-          disabled={values[index] !== ""}
+          disabled={initialValues[index] !== ""}
           onselect={() => handleTileSelect(index)}
           ondeselect={handleTileDeselect}
         />

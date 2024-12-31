@@ -8,6 +8,7 @@
     "3:6,0,0,0,0,0,0,0,0,0,7,5,0,0,0,0,8,9,0,0,0,0,8,9,1,0,0,0,0,1,7,5,0,0,0,0,0,0,0,0,0,6,0,9,0,4,0,0,0,0,0,0,0,0,0,0,0,5,0,4,2,6,0,5,3,0,0,0,0,0,0,0,0,0,8,0,1,0,0,0,0";
 
   let values: string[] = $state([]);
+  let initialValues: string[] = $state([]);
   let size: number = $state(1);
 
   const submit = () => {
@@ -16,6 +17,7 @@
 
   const reset = () => {
     console.log("Reset puzzle...");
+    values = initialValues;
   };
 
   const shuffle = () => {
@@ -27,8 +29,9 @@
   $effect(() => {
     if (hasRun) return;
 
-    [size, values] = sudokuService.deserialize(exampleSerialSudoku);
-    console.log(values);
+    [size, initialValues] = sudokuService.deserialize(exampleSerialSudoku);
+    values = Array.from(initialValues);
+    console.log(initialValues);
 
     let serial = sudokuService.serialize(values);
 
@@ -46,7 +49,7 @@
   </div>
   <div class="flex flex-col items-center">
     <h3 class="mdc-typography--headline3">Sudoku</h3>
-    <SudokuGrid {size} bind:values />
+    <SudokuGrid {size} bind:values {initialValues} />
   </div>
   <PuzzleControls {submit} {reset} {shuffle} />
 </div>
