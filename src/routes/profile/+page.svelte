@@ -21,19 +21,19 @@
   let showPasswordReset = false;
 </script>
 
-<div class="profile-container">
-  <div class="content-wrapper">
-    <div class="left-column">
-      <div class="profile-header">
-        <div class="avatar-section">
-          <img src={user.avatar} alt="Profile" class="avatar" />
-          <div class="name-container">
-            <h1>{user.name}</h1>
+<div class="max-w-[1200px] mx-auto mt-[76px] mb-10 px-5">
+  <div class="flex gap-10">
+    <div class="flex-none w-[400px] border-r border-gray-200 pr-10">
+      <div class="text-center">
+        <div class="flex flex-col items-center gap-4">
+          <img src={user.avatar} alt="Profile" class="w-48 h-48 rounded-full" />
+          <div class="text-center">
+            <h1 class="text-[45px] font-bold m-0">{user.name}</h1>
           </div>
         </div>
 
-        <div class="settings-section">
-          <div class="settings-content">
+        <div class="mt-4 p-4 bg-white rounded-3xl shadow-sm">
+          <div class="flex flex-col items-center gap-0">
             <Button 
               text="Reset my Password" 
               type="secondary" 
@@ -43,11 +43,21 @@
             />
             
             {#if showPasswordReset}
-              <div class="password-reset" transition:slide>
-                <div class="password-form">
-                  <input type="password" bind:value={oldPassword} placeholder="Old password" />
-                  <input type="password" bind:value={newPassword} placeholder="New password" />
-                  <div class="button-row">
+              <div class="w-full mt-6" transition:slide>
+                <div class="flex flex-col gap-4 w-full">
+                  <input 
+                    type="password" 
+                    bind:value={oldPassword} 
+                    placeholder="Old password"
+                    class="p-3 border-4 border-black rounded-[14px] text-base font-semibold"
+                  />
+                  <input 
+                    type="password" 
+                    bind:value={newPassword} 
+                    placeholder="New password"
+                    class="p-3 border-4 border-black rounded-[14px] text-base font-semibold"
+                  />
+                  <div class="flex justify-center gap-4 mt-2">
                     <Button text="Reset" type="primary" fontSize="16px" />
                     <Button 
                       text="Cancel" 
@@ -64,21 +74,25 @@
       </div>
     </div>
 
-    <div class="right-column">
-      <div class="records-section">
-        <h2>
+    <div class="flex-1 pl-10">
+      <div class="bg-white rounded-3xl p-6 shadow-sm">
+        <h2 class="text-[45px] font-bold mb-5 text-center">
           My records 
-          <img src="/images/Picture2.png" alt="Trophy" class="title-trophy" />
+          <img src="/images/Picture2.png" alt="Trophy" class="inline-block w-[41px] h-[41px] -mb-[6px] ml-1" />
         </h2>
-        <div class="records-list">
+        <div class="space-y-4">
           {#each user.puzzleRecords as record}
-            <div class="record-container">
-              <div class="record-item">
-                <span class="puzzle-name">{record.name}</span>
-                <div class="divider"></div>
-                <span class="score">
+            <div class="bg-white rounded-3xl p-4 px-6 shadow-sm">
+              <div class="flex items-center">
+                <span class="font-semibold text-xl flex-1">{record.name}</span>
+                <div class="w-px h-9 bg-gray-200 mx-6"></div>
+                <span class="font-semibold text-sm flex-1 text-right">
                   {record.score} 
-                  <img src="/images/Picture2.png" alt="Trophy" class="trophy-icon" />
+                  <img 
+                    src="/images/Picture2.png" 
+                    alt="Trophy" 
+                    class="inline-block w-3.5 h-3.5 -mb-0.5 ml-0.5" 
+                  />
                 </span>
               </div>
             </div>
@@ -88,210 +102,3 @@
     </div>
   </div>
 </div>
-
-<style>
-  .profile-container {
-    max-width: 1200px;
-    margin: 76px auto 40px;
-    padding: 0 20px;
-  }
-
-  .content-wrapper {
-    display: flex;
-    gap: 40px;
-  }
-
-  .left-column {
-    flex: 0 0 400px;
-    border-right: 1px solid #e0e0e0;
-    padding-right: 40px;
-  }
-
-  .right-column {
-    flex: 1;
-    padding-left: 40px;
-  }
-
-  .profile-header {
-    text-align: center;
-  }
-
-  .avatar {
-    width: 192px;
-    height: 192px;
-    border-radius: 50%;
-    margin-bottom: 0;
-  }
-
-  h1 {
-    font-size: 45px;
-    font-weight: bold;
-    margin: 0;
-  }
-
-  h2 {
-    font-size: 45px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-
-  .records-section {
-    background: white;
-    border-radius: 24px;
-    padding: 24px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  }
-
-  .record-container {
-    background: white;
-    border-radius: 24px;
-    padding: 16px 24px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    margin-bottom: 16px;
-    position: relative;
-  }
-
-  .record-container:last-child {
-    margin-bottom: 0;
-  }
-
-  .record-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 18px;
-    position: relative;
-  }
-
-  .record-item:last-child {
-    border-bottom: none;
-  }
-
-  .password-reset {
-    width: 100%;
-    margin-top: 23px;
-  }
-
-  .password-form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-  }
-
-  input {
-    padding: 12px;
-    border: 4px solid #000000;
-    border-radius: 14px;
-    font-size: 16px;
-    font-weight: 600;
-  }
-
-  input::placeholder {
-    font-weight: 600;
-  }
-
-  .puzzle-name {
-    font-weight: 600;
-    font-size: 20px;
-    flex: 1;
-    text-align: left;
-  }
-
-  .score {
-    font-weight: 600;
-    font-size: 15px;
-    flex: 1;
-    text-align: right;
-  }
-
-  .settings-section {
-    margin-top: 16px;
-    padding: 16px;
-    background: white;
-    border-radius: 24px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  }
-
-  .settings-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-  }
-
-  .avatar-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .avatar {
-    width: 192px;
-    height: 192px;
-    border-radius: 50%;
-    margin-bottom: 0;
-  }
-
-  .name-container {
-    text-align: center;
-  }
-
-  h1 {
-    font-size: 45px;
-    font-weight: bold;
-    margin: 0;
-  }
-
-  .password-reset {
-    width: 100%;
-  }
-
-  .password-form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    width: 100%;
-  }
-
-  .button-row {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    margin-top: 8px;
-  }
-
-  h2 {
-    font-size: 45px;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-
-  .trophy-icon {
-    width: 14px;
-    height: 14px;
-    vertical-align: -2px;
-    display: inline-block;
-    margin-left: 2px;
-  }
-
-  .title-trophy {
-    width: 41px;
-    height: 41px;
-    vertical-align: -6px;
-    display: inline-block;
-    margin-left: 4px;
-  }
-
-  .divider {
-    width: 1px;
-    height: 36px;
-    background-color: #e0e0e0;
-    margin: 0 24px;
-    align-self: center;
-  }
-</style>
