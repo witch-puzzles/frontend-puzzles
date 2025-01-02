@@ -44,8 +44,8 @@
   });
 </script>
 
-<BackgroundWrapper>
-  <div class="h-dvh flex items-center justify-center">
+<div class="overflow-hidden">
+  <div class="flex items-center justify-center">
     <ContentBackgroundWrapper class="w-fit">
       <div class="flex gap-12 items-center p-8">
         <div class="flex flex-col justify-center items-center">
@@ -60,4 +60,4 @@
       </div>
     </ContentBackgroundWrapper>
   </div>
-</BackgroundWrapper>
+</div>
