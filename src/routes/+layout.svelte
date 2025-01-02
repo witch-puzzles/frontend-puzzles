@@ -1,11 +1,22 @@
-<script>
-	import '../app.css';
-	import TopBar from '../lib/TopBar.svelte';
-  
-	let isLoggedIn = false;
-  </script>
-  
-  <TopBar {isLoggedIn} />
-  
-  <slot />
-  
+<script lang="ts">
+  import type { Snippet } from "svelte";
+  import "../app.css";
+  import TopBar from "../lib/TopBar.svelte";
+  import BackgroundWrapper from "$lib/components/BackgroundWrapper.svelte";
+  interface Props {
+    children: Snippet<[]>;
+    isLoggedIn: boolean;
+  }
+
+  let { children, isLoggedIn }: Props = $props();
+</script>
+
+<BackgroundWrapper>
+  <div class="flex flex-col">
+    <TopBar {isLoggedIn} />
+
+    <main class="h-dvh">
+      {@render children()}
+    </main>
+  </div>
+</BackgroundWrapper>
