@@ -8,15 +8,24 @@ importers:
 
   .:
     dependencies:
+      '@smui/icon-button':
+        specifier: ^8.0.0-beta.3
+        version: 8.0.0-beta.3
+      '@smui/top-app-bar':
+        specifier: ^8.0.0-beta.3
+        version: 8.0.0-beta.3
       firebase:
         specifier: ^11.0.2
         version: 11.0.2
+      lucide-svelte:
+        specifier: ^0.469.0
+        version: 0.469.0(svelte@5.2.3)
     devDependencies:
       '@material/typography':
         specifier: ^14.0.0
         version: 14.0.0
       '@smui/button':
-        specifier: 8.0.0-beta.0
+        specifier: ^8.0.0-beta.0
         version: 8.0.0-beta.0(svelte@5.2.3)(typescript@5.6.3)
       '@smui/common':
         specifier: 8.0.0-beta.0
@@ -48,6 +57,9 @@ importers:
       svelte-check:
         specifier: ^4.0.0
         version: 4.0.9(svelte@5.2.3)(typescript@5.6.3)
+      tailwind-scrollbar:
+        specifier: ^3.1.0
+        version: 3.1.0(tailwindcss@3.4.15)
       tailwindcss:
         specifier: ^3.4.9
         version: 3.4.15
@@ -474,6 +486,9 @@ packages:
   '@material/focus-ring@14.0.0':
     resolution: {integrity: sha512-fqqka6iSfQGJG3Le48RxPCtnOiaLGPDPikhktGbxlyW9srBVMgeCiONfHM7IT/1eu80O0Y67Lh/4ohu5+C+VAQ==}
 
+  '@material/icon-button@14.0.0':
+    resolution: {integrity: sha512-wHMqzm7Q/UwbWLoWv32Li1r2iVYxadIrwTNxT0+p+7NdfI3lEwMN3NoB0CvoJnHTljjXDzce0KJ3nZloa0P0gA==}
+
   '@material/line-ripple@14.0.0':
     resolution: {integrity: sha512-Rx9eSnfp3FcsNz4O+fobNNq2PSm5tYHC3hRpY2ZK3ghTvgp3Y40/soaGEi/Vdg0F7jJXRaBSNOe6p5t9CVfy8Q==}
 
@@ -500,6 +515,9 @@ packages:
 
   '@material/tokens@14.0.0':
     resolution: {integrity: sha512-SXgB9VwsKW4DFkHmJfDIS0x0cGdMWC1D06m6z/WQQ5P5j6/m0pKrbHVlrLzXcRjau+mFhXGvj/KyPo9Pp/Rc8Q==}
+
+  '@material/top-app-bar@14.0.0':
+    resolution: {integrity: sha512-uPej5vHgZnlSB1+koiA9FnabXrHh3O/Npl2ifpUgDVwHDSOxKvLp2LNjyCO71co1QLNnNHIU0xXv3B97Gb0rpA==}
 
   '@material/touch-target@14.0.0':
     resolution: {integrity: sha512-o3kvxmS4HkmZoQTvtzLJrqSG+ezYXkyINm3Uiwio1PTg67pDgK5FRwInkz0VNaWPcw9+5jqjUQGjuZMtjQMq8w==}
@@ -740,6 +758,9 @@ packages:
   '@smui/floating-label@8.0.0-beta.0':
     resolution: {integrity: sha512-hc7w377Q9LtAQpw2uKz3G90nobWoiGHXpsVFjvcFbv/B3bw51nRYbrzCZWz/Ua4vSYY06pSZ1tddA7le04EIQg==}
 
+  '@smui/icon-button@8.0.0-beta.3':
+    resolution: {integrity: sha512-3tT3RHGsGaelfdl8o9lzvcHhg9XiaOFBYjz4cBPhkJIJ01/FBo2x9M/jno37+7Ic8CTffA8cZlQSqtF5P9epKA==}
+
   '@smui/line-ripple@8.0.0-beta.0':
     resolution: {integrity: sha512-iUQ862Lzo1Ho403F9pYl2V2HaUD1WBfsU7c6+V4xCZsP93qB6k81+dR9ZB04Ru21BpBvX0lBYC3cVm7xkrgImg==}
 
@@ -757,6 +778,9 @@ packages:
 
   '@smui/textfield@8.0.0-beta.0':
     resolution: {integrity: sha512-+UiaouphNsiSuo8uzAaeXC55eBOYplh8LaMXJsaRIn3U2XmBZdPmacYoTuTT9fFcUvERcjVoAT2G5dWEiyskaw==}
+
+  '@smui/top-app-bar@8.0.0-beta.3':
+    resolution: {integrity: sha512-/C5jZ/Zhdu9WmuouD3wTpSBNJPzZQLLLR77VBoEGLIwMs31LOKaMv96aO9RPYOlWAJb2isgN8kdFBOEN/2Lvnw==}
 
   '@sveltejs/adapter-auto@3.3.1':
     resolution: {integrity: sha512-5Sc7WAxYdL6q9j/+D0jJKjGREGlfIevDyHSQ2eNETHcB1TKlQWHcAo8AS8H1QdjNvSXpvOwNjykDUHPEAyGgdQ==}
@@ -1120,6 +1144,11 @@ packages:
   lru-cache@10.4.3:
     resolution: {integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==}
 
+  lucide-svelte@0.469.0:
+    resolution: {integrity: sha512-PMIJ8jrFqVUsXJz4d1yfAQplaGhNOahwwkzbunha8DhpiD73xqX24n8dE1dPpUk3vcrdWVsHc1y/liHHotOnGQ==}
+    peerDependencies:
+      svelte: ^3 || ^4 || ^5.0.0-next.42
+
   magic-string@0.30.13:
     resolution: {integrity: sha512-8rYBO+MsWkgjDSOvLomYnzhdwEG51olQ4zL5KXnNJWV5MNmrb4rTZdrtkhxjnD/QyZUqR/Z/XDsUs/4ej2nx0g==}
 
@@ -1384,6 +1413,12 @@ packages:
   svelte@5.2.3:
     resolution: {integrity: sha512-DRrWXdzo6+gfX9H/hQofQYyAtsGqC99+CFBvttImGt6gAy4Xzh0hHBrCHw5OtBgaPOdVGNW+S+mDcYcEsvTPOw==}
     engines: {node: '>=18'}
+
+  tailwind-scrollbar@3.1.0:
+    resolution: {integrity: sha512-pmrtDIZeHyu2idTejfV59SbaJyvp1VRjYxAjZBH0jnyrPRo6HL1kD5Glz8VPagasqr6oAx6M05+Tuw429Z8jxg==}
+    engines: {node: '>=12.13.0'}
+    peerDependencies:
+      tailwindcss: 3.x
 
   tailwindcss@3.4.15:
     resolution: {integrity: sha512-r4MeXnfBmSOuKUWmXe6h2CcyfzJCEk4F0pptO5jlnYSIViUkVmsawj80N5h2lO3gwcmSb4n3PuN+e+GC1Guylw==}
@@ -2016,6 +2051,20 @@ snapshots:
       '@material/feature-targeting': 14.0.0
       '@material/rtl': 14.0.0
 
+  '@material/icon-button@14.0.0':
+    dependencies:
+      '@material/base': 14.0.0
+      '@material/density': 14.0.0
+      '@material/dom': 14.0.0
+      '@material/elevation': 14.0.0
+      '@material/feature-targeting': 14.0.0
+      '@material/focus-ring': 14.0.0
+      '@material/ripple': 14.0.0
+      '@material/rtl': 14.0.0
+      '@material/theme': 14.0.0
+      '@material/touch-target': 14.0.0
+      tslib: 2.8.1
+
   '@material/line-ripple@14.0.0':
     dependencies:
       '@material/animation': 14.0.0
@@ -2093,6 +2142,18 @@ snapshots:
   '@material/tokens@14.0.0':
     dependencies:
       '@material/elevation': 14.0.0
+
+  '@material/top-app-bar@14.0.0':
+    dependencies:
+      '@material/animation': 14.0.0
+      '@material/base': 14.0.0
+      '@material/elevation': 14.0.0
+      '@material/ripple': 14.0.0
+      '@material/rtl': 14.0.0
+      '@material/shape': 14.0.0
+      '@material/theme': 14.0.0
+      '@material/typography': 14.0.0
+      tslib: 2.8.1
 
   '@material/touch-target@14.0.0':
     dependencies:
@@ -2298,6 +2359,13 @@ snapshots:
       - svelte
       - typescript
 
+  '@smui/icon-button@8.0.0-beta.3':
+    dependencies:
+      '@material/density': 14.0.0
+      '@material/icon-button': 14.0.0
+      '@smui/common': 8.0.0-beta.3
+      '@smui/ripple': 8.0.0-beta.3
+
   '@smui/line-ripple@8.0.0-beta.0(svelte@5.2.3)(typescript@5.6.3)':
     dependencies:
       '@material/line-ripple': 14.0.0
@@ -2357,6 +2425,12 @@ snapshots:
     transitivePeerDependencies:
       - svelte
       - typescript
+
+  '@smui/top-app-bar@8.0.0-beta.3':
+    dependencies:
+      '@material/feature-targeting': 14.0.0
+      '@material/top-app-bar': 14.0.0
+      '@smui/common': 8.0.0-beta.3
 
   '@sveltejs/adapter-auto@3.3.1(@sveltejs/kit@2.8.1(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.3)(vite@5.4.11(@types/node@22.9.1)(sass@1.82.0)))(svelte@5.2.3)(vite@5.4.11(@types/node@22.9.1)(sass@1.82.0)))':
     dependencies:
@@ -2736,6 +2810,10 @@ snapshots:
 
   lru-cache@10.4.3: {}
 
+  lucide-svelte@0.469.0(svelte@5.2.3):
+    dependencies:
+      svelte: 5.2.3
+
   magic-string@0.30.13:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.0
@@ -3024,6 +3102,10 @@ snapshots:
       locate-character: 3.0.0
       magic-string: 0.30.13
       zimmerframe: 1.1.2
+
+  tailwind-scrollbar@3.1.0(tailwindcss@3.4.15):
+    dependencies:
+      tailwindcss: 3.4.15
 
   tailwindcss@3.4.15:
     dependencies:
