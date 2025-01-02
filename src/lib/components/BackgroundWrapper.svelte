@@ -18,8 +18,8 @@
 <style>
   :root {
     --glow-rgb: 245 245 245;
-    --light-gold-rgb: 249 181 51;
-    --dark-gold-rgb: 215 147 23;
+    --light-gold-rgb: 249 161 67;
+    --dark-gold-rgb: 248 137 18;
   }
 
   #app {
