@@ -1,8 +1,10 @@
 <script lang="ts">
   import SudokuGrid from "$lib/components/SudokuGrid.svelte";
+  import Icon from "$lib/components/Icon.svelte";
   import PuzzleControls from "$lib/components/PuzzleControls.svelte";
   import SudokuService from "$lib/SudokuService";
   import ContentBackgroundWrapper from "$lib/components/ContentBackgroundWrapper.svelte";
+  import ShareMenu from "$lib/components/ShareMenu.svelte";
 
   const sudokuService = new SudokuService();
   const exampleSerialSudoku =
@@ -11,6 +13,10 @@
   let values: string[] = $state([]);
   let initialValues: string[] = $state([]);
   let size: number = $state(1);
+
+  let link = "https://google.com213123123122312312312313123312";
+  let puzzleId = "utku-id-puzzle-123";
+  // TODO: replace by fetched ID & link
 
   const submit = () => {
     console.log("Submit puzzle...");
@@ -71,10 +77,15 @@
         </div>
       </div>
       <div class="flex flex-col items-center">
-        <h3 class="text-3xl font-bold">Sudoku</h3>
-        <SudokuGrid {size} bind:values {initialValues} />
+        <div class="flex flex-col">
+          <h4 class="self-center mdc-typography--headline4">Sudoku</h4>
+          <SudokuGrid {size} bind:values {initialValues} />
+        </div>
       </div>
-      <PuzzleControls {submit} {reset} {shuffle} />
+      <div class="h-full flex flex-col justify-around">
+        <PuzzleControls {submit} {reset} {shuffle} />
+        <ShareMenu {link} {puzzleId} />
+      </div>
     </div>
   </ContentBackgroundWrapper>
 </div>
