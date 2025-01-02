@@ -16,6 +16,7 @@
 
   let link = "https://google.com213123123122312312312313123312";
   let puzzleId = "utku-id-puzzle-123";
+  // TODO: replace by fetched ID & link
 
   const submit = () => {
     console.log("Submit puzzle...");
