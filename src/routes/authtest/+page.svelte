@@ -1,6 +1,4 @@
 <script lang="ts">
-  import Button from "@smui/button";
-  import Textfield from "@smui/textfield";
   import { initializeApp } from "firebase/app";
   import {
     getAuth,

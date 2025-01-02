@@ -50,7 +50,7 @@
 </script>
 
 <div class="h-full flex items-center justify-center">
-  <ContentBackgroundWrapper class="w-fit">
+  <ContentBackgroundWrapper>
     <div class="flex gap-12 items-center p-8">
       <div
         class="flex flex-col gap-4 max-w-xs bg-orange-100 rounded-lg shadow-md border-2 border-orange-300 p-8"
