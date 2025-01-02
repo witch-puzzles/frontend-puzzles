@@ -2,7 +2,6 @@
   import SudokuGrid from "$lib/components/SudokuGrid.svelte";
   import PuzzleControls from "$lib/components/PuzzleControls.svelte";
   import SudokuService from "$lib/SudokuService";
-  import BackgroundWrapper from "$lib/components/BackgroundWrapper.svelte";
   import ContentBackgroundWrapper from "$lib/components/ContentBackgroundWrapper.svelte";
 
   const sudokuService = new SudokuService();
@@ -44,7 +43,7 @@
   });
 </script>
 
-<div class="flex items-center justify-center">
+<div class="h-full flex items-center justify-center">
   <ContentBackgroundWrapper class="w-fit">
     <div class="flex gap-12 items-center p-8">
       <div class="flex flex-col justify-center items-center">

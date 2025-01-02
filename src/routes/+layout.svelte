@@ -15,6 +15,8 @@
   <div class="flex flex-col">
     <TopBar {isLoggedIn} />
 
-    {@render children()}
+    <main class="h-dvh">
+      {@render children()}
+    </main>
   </div>
 </BackgroundWrapper>
