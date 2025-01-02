@@ -1,6 +1,5 @@
 <script lang="ts">
   import Icon from "$lib/components/Icon.svelte";
-  import Button, { Label } from "@smui/button";
   import Timer from "./Timer.svelte";
 
   interface Props {
@@ -34,7 +33,7 @@
       onclick={() => shuffle()}
       class="p-2 bg-white border-2 border-orange-300 text-orange-600 rounded hover:bg-orange-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-400"
     >
-      <Icon tag="shuffle" class="w-6 h-6" />
+      <Icon tag="shuffle" class="w-6 h-6" color="#f97316" />
     </button>
   </div>
 </div>
