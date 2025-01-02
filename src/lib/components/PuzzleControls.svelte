@@ -13,7 +13,7 @@
   let { time = $bindable(0), submit, reset, shuffle }: Props = $props();
 </script>
 
-<div class="flex flex-col items-center border border-black">
+<div class="flex flex-col justify-center items-center border border-black">
   <Timer bind:seconds={time} />
   <div class="flex flex-row justify-around gap-2 m-2">
     <Button onclick={() => submit()} variant="raised"
