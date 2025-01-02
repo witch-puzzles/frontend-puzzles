@@ -54,28 +54,29 @@
 <button
   onclick={handleClick}
   {disabled}
-  class="center-value tile"
+  class="tile"
   class:selected={isSelected}
   class:highlighted={!isSelected && isHighlighted}
+  class:disabled
   onkeydown={(e) => setValue(e.key)}
 >
   {value}
 </button>
 
 <style lang="postcss">
-  .center-value {
-    @apply flex items-center justify-center;
-  }
-
   .tile {
-    @apply w-12 h-12 border border-black;
+    @apply flex items-center justify-center w-12 h-12 text-lg font-semibold transition-colors duration-200 ease-in-out bg-white border border-orange-300 hover:bg-orange-50 focus:outline-none;
   }
 
-  .tile.selected {
-    @apply bg-blue-100;
+  .selected {
+    @apply bg-orange-300;
   }
 
-  .tile.highlighted {
-    @apply bg-orange-100;
+  .highlighted {
+    @apply bg-orange-200;
+  }
+
+  .disabled {
+    @apply bg-orange-50 text-orange-800 cursor-not-allowed;
   }
 </style>
