@@ -40,7 +40,7 @@
 
   /* Background elements */
   #star-pattern {
-    background-image: url("https://assets.codepen.io/1468070/Star+Pattern+3.svg");
+    background-image: url("/star-pattern.svg");
     background-size: 10%;
     position: absolute;
     left: 50%;
