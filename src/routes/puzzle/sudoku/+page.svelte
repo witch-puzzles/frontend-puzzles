@@ -76,17 +76,12 @@
         </div>
       </div>
       <div class="flex flex-col items-center">
-        <div class="flex flex-row">
-          <div class="flex flex-col">
-            <h4 class="self-center mdc-typography--headline4">Sudoku</h4>
-            <SudokuGrid {size} bind:values {initialValues} />
-          </div>
-          <button class="self-end my-2"
-            ><Icon tag="moreVert" class="w-8 h-8" color="#fff7ed" /></button
-          >
+        <div class="flex flex-col">
+          <h4 class="self-center mdc-typography--headline4">Sudoku</h4>
+          <SudokuGrid {size} bind:values {initialValues} />
         </div>
       </div>
-      <div class="h-full flex flex-col justify-around outline outline-black">
+      <div class="h-full flex flex-col justify-around">
         <PuzzleControls {submit} {reset} {shuffle} />
         <ShareMenu {link} {puzzleId} />
       </div>
