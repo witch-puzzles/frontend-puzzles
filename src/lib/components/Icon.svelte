@@ -1,9 +1,23 @@
 <script lang="ts">
-  export let tag: keyof typeof iconMap;
-  export let width = "100%";
-  export let height = "100%";
-  export let opacity = 1;
-  export let focusable: string | number | null | undefined = undefined;
+  interface Props {
+    tag: keyof typeof iconMap;
+    width?: string;
+    height?: string;
+    opacity?: number;
+    color?: string;
+    focusable?: string | number | null | undefined;
+    class: string;
+  }
+
+  let {
+    tag,
+    width,
+    height,
+    opacity = 1,
+    color = "black",
+    focusable = undefined,
+    class: className = "",
+  }: Props = $props();
 
   let iconMap = {
     hashtag: {
@@ -12,15 +26,11 @@
     },
     textFields: {
       box: { minX: 0, minY: -960, width: 960, height: 960 },
-      svg: `<path
-    d="M280-160v-520H80v-120h520v120H400v520H280Zm360 0v-320H520v-120h360v120H760v320H640Z"
-  />`,
+      svg: `<path d="M280-160v-520H80v-120h520v120H400v520H280Zm360 0v-320H520v-120h360v120H760v320H640Z"/>`,
     },
     dataObject: {
       box: { minX: 0, minY: -960, width: 960, height: 960 },
-      svg: `<path
-    d="M560-160v-80h120q17 0 28.5-11.5T720-280v-80q0-38 22-69t58-44v-14q-36-13-58-44t-22-69v-80q0-17-11.5-28.5T680-720H560v-80h120q50 0 85 35t35 85v80q0 17 11.5 28.5T840-560h40v160h-40q-17 0-28.5 11.5T800-360v80q0 50-35 85t-85 35H560Zm-280 0q-50 0-85-35t-35-85v-80q0-17-11.5-28.5T120-400H80v-160h40q17 0 28.5-11.5T160-600v-80q0-50 35-85t85-35h120v80H280q-17 0-28.5 11.5T240-680v80q0 38-22 69t-58 44v14q36 13 58 44t22 69v80q0 17 11.5 28.5T280-240h120v80H280Z"
-  />`,
+      svg: `<path d="M560-160v-80h120q17 0 28.5-11.5T720-280v-80q0-38 22-69t58-44v-14q-36-13-58-44t-22-69v-80q0-17-11.5-28.5T680-720H560v-80h120q50 0 85 35t35 85v80q0 17 11.5 28.5T840-560h40v160h-40q-17 0-28.5 11.5T800-360v80q0 50-35 85t-85 35H560Zm-280 0q-50 0-85-35t-35-85v-80q0-17-11.5-28.5T120-400H80v-160h40q17 0 28.5-11.5T160-600v-80q0-50 35-85t85-35h120v80H280q-17 0-28.5 11.5T240-680v80q0 38-22 69t-58 44v14q36 13 58 44t22 69v80q0 17 11.5 28.5T280-240h120v80H280Z"/>`,
     },
     deleteTrash: {
       box: { minX: 0, minY: -960, width: 960, height: 960 },
@@ -50,7 +60,6 @@
       box: { minX: 0, minY: -960, width: 960, height: 960 },
       svg: `<path d="M440-320v-326L336-542l-56-58 200-200 200 200-56 58-104-104v326h-80ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/>`,
     },
-
     clock: {
       box: { minX: 0, minY: -960, width: 960, height: 960 },
       svg: `<path d="m612-292 56-56-148-148v-184h-80v216l172 172ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-400Zm0 320q133 0 226.5-93.5T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 133 93.5 226.5T480-160Z"/>`,
@@ -65,11 +74,12 @@
 </script>
 
 <svg
-  class={$$restProps.class || ""}
+  class={className}
   {focusable}
   {opacity}
   {width}
   {height}
+  fill={color}
   viewBox="{displayIcon.box.minX} {displayIcon.box.minY} {displayIcon.box
     .width} {displayIcon.box.height}">{@html displayIcon.svg}</svg
 >

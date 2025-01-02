@@ -18,7 +18,7 @@
 
   const reset = () => {
     console.log("Reset puzzle...");
-    values = initialValues;
+    values = Array.from(initialValues);
   };
 
   const shuffle = () => {
@@ -46,9 +46,29 @@
 <div class="h-full flex items-center justify-center">
   <ContentBackgroundWrapper class="w-fit">
     <div class="flex gap-12 items-center p-8">
-      <div class="flex flex-col justify-center items-center">
-        <h6 class="text-xl font-semibold">How to Play</h6>
-        <p>It's Sudoku.</p>
+      <div
+        class="flex flex-col gap-4 max-w-xs bg-orange-100 rounded-lg shadow-md border-2 border-orange-300 p-8"
+      >
+        <h6 class="text-2xl font-bold">How to Play</h6>
+        <div class="space-y-3">
+          <p class="font-medium">Fill the 9×9 grid with numbers 1-9:</p>
+          <ul class="list-disc pl-5 space-y-2">
+            <li>Each row must contain numbers 1-9 without repetition</li>
+            <li>Each column must contain numbers 1-9 without repetition</li>
+            <li>Each 3×3 box must contain numbers 1-9 without repetition</li>
+          </ul>
+          <div class="pt-2">
+            <p class="font-medium">Controls:</p>
+            <ul class="list-none pl-5 space-y-1 text-sm">
+              <li>🖱️ Click a cell to select it</li>
+              <li>⌨️ Type numbers 1-9 to fill</li>
+              <li>⌫ Backspace to clear a cell</li>
+            </ul>
+          </div>
+          <p class="text-sm italic mt-4">
+            Pre-filled numbers cannot be modified.
+          </p>
+        </div>
       </div>
       <div class="flex flex-col items-center">
         <h3 class="text-3xl font-bold">Sudoku</h3>
