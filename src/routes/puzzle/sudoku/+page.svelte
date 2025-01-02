@@ -45,19 +45,19 @@
 </script>
 
 <BackgroundWrapper>
-  <ContentBackgroundWrapper>
-    <div class="min-h-screen w-full flex items-center justify-center p-8">
-      <div class="flex flex-wrap gap-12 justify-center">
+  <div class="h-dvh flex items-center justify-center">
+    <ContentBackgroundWrapper class="w-fit">
+      <div class="flex gap-12 items-center p-8">
         <div class="flex flex-col justify-center items-center">
-          <h6 class="mdc-typography--headline6">How to Play</h6>
+          <h6 class="text-xl font-semibold">How to Play</h6>
           <p>It's Sudoku.</p>
         </div>
         <div class="flex flex-col items-center">
-          <h3 class="mdc-typography--headline3">Sudoku</h3>
+          <h3 class="text-3xl font-bold">Sudoku</h3>
           <SudokuGrid {size} bind:values {initialValues} />
         </div>
         <PuzzleControls {submit} {reset} {shuffle} />
       </div>
-    </div>
-  </ContentBackgroundWrapper>
+    </ContentBackgroundWrapper>
+  </div>
 </BackgroundWrapper>
