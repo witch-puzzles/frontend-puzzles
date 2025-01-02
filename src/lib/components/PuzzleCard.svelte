@@ -1,6 +1,5 @@
 <script lang="ts">
   import type Puzzle from "$lib/Puzzle";
-  import { Label } from "@smui/button";
 
   interface Props {
     puzzle: Puzzle;

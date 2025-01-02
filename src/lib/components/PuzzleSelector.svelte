@@ -1,8 +1,6 @@
 <script lang="ts">
-  import Button, { Label } from "@smui/button";
   import type Puzzle from "$lib/Puzzle";
   import { PuzzleDifficulty } from "$lib/Puzzle";
-  import PuzzleCard from "./PuzzleCard.svelte";
   import DifficultySelector from "./DifficultySelector.svelte";
 
   interface Props {
@@ -31,10 +29,10 @@
   <div>
     {#each puzzles as puzzle (puzzle)}
       {#if puzzle === selectedPuzzle}
-        <Button variant="raised"><Label>{puzzle.name}</Label></Button>
+        <button class="puzzle-button selected">{puzzle.name}</button>
       {:else}
-        <Button onclick={() => handleSelectPuzzle(puzzle)}
-          ><PuzzleCard {puzzle} /></Button
+        <button onclick={() => handleSelectPuzzle(puzzle)} class="puzzle-button"
+          >{puzzle.name}</button
         >
       {/if}
     {/each}
@@ -42,4 +40,11 @@
 </div>
 
 <style lang="postcss">
+  .puzzle-button {
+    @apply px-4 py-2 bg-white border-2 border-orange-300 text-orange-600 font-semibold rounded hover:bg-orange-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-400;
+  }
+
+  .puzzle-button.selected {
+    @apply px-4 py-2 bg-orange-500 text-white font-semibold rounded hover:bg-orange-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-400;
+  }
 </style>

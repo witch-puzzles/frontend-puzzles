@@ -1,11 +1,11 @@
 <script lang="ts">
   import PuzzleSelector from "$lib/components/PuzzleSelector.svelte";
-  import Button, { Label } from "@smui/button";
   import { PuzzleDifficulty } from "$lib/Puzzle";
   import SudokuPuzzle from "$lib/SudokuPuzzle";
   import type Puzzle from "$lib/Puzzle";
+  import ContentBackgroundWrapper from "$lib/components/ContentBackgroundWrapper.svelte";
 
-  const puzzles = [new SudokuPuzzle(), new SudokuPuzzle(), new SudokuPuzzle()];
+  const puzzles = [new SudokuPuzzle()];
 
   let selectedPuzzle: Puzzle = $state(puzzles[0]);
 
@@ -14,11 +14,24 @@
   );
 </script>
 
-<div class="flex flex-col items-center gap-8">
-  <h1 class="mdc-typography--headline3">Which puzzle do you want to solve?</h1>
-  <PuzzleSelector {puzzles} bind:selectedPuzzle bind:selectedDifficulty />
-  <!-- TODO: add query params for difficulty etc. -->
-  <a href={`/puzzle/${selectedPuzzle.name.toLowerCase()}`}>
-    <Button variant="raised"><Label>Solve!</Label></Button>
-  </a>
+<div class="h-full flex items-center justif-center">
+  <ContentBackgroundWrapper>
+    <div class="flex flex-col items-center gap-8">
+      <h3 class="header">Which puzzle would you like to solve?</h3>
+      <PuzzleSelector {puzzles} bind:selectedPuzzle bind:selectedDifficulty />
+      <!-- TODO: add query params for difficulty etc. -->
+      <a href={`/puzzle/${selectedPuzzle.name.toLowerCase()}`}>
+        <button
+          class="px-4 py-2 bg-white border-2 border-orange-300 text-orange-600 font-semibold rounded hover:bg-orange-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-400"
+          >Solve!</button
+        >
+      </a>
+    </div>
+  </ContentBackgroundWrapper>
 </div>
+
+<style lang="postcss">
+  .header {
+    @apply text-3xl font-bold text-orange-50;
+  }
+</style>
