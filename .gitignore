@@ -24,3 +24,6 @@ vite.config.ts.timestamp-*
 # firebase
 .firebasesrc
 firebase-debug.log
+
+.mise.toml
+mise.toml
