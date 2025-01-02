@@ -8,20 +8,13 @@
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"smui-theme-light": "smui-theme compile static/smui.css -i src/theme -i node_modules",
-		"prepare": "pnpm run smui-theme-light"
 	},
 	"devDependencies": {
 		"@material/typography": "^14.0.0",
-		"@smui/button": "^8.0.0-beta.0",
-		"@smui/common": "8.0.0-beta.0",
-		"@smui/segmented-button": "8.0.0-beta.3",
-		"@smui/textfield": "8.0.0-beta.0",
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^4.0.0",
 		"autoprefixer": "^10.4.20",
-		"smui-theme": "8.0.0-beta.0",
 		"svelte": "^5.0.0",
 		"svelte-check": "^4.0.0",
 		"tailwind-scrollbar": "^3.1.0",
@@ -30,8 +23,6 @@
 		"vite": "^5.0.3"
 	},
 	"dependencies": {
-		"@smui/icon-button": "^8.0.0-beta.3",
-		"@smui/top-app-bar": "^8.0.0-beta.3",
 		"firebase": "^11.0.2",
 		"lucide-svelte": "^0.469.0"
 	}
