@@ -1,17 +1,20 @@
 <script>
     export let text = '';
     export let type = 'primary';
+    export let variant = 'default';
     export let imageSrc = '';
     export let fontSize = '16px';
+    export let style = '';
   </script>
   
   <button
-    class={`button ${type}`}
+    class={`button ${type} ${variant}`}
     style={`
       font-size: ${fontSize};
       padding: calc(${fontSize} * 0.5) calc(${fontSize} * 1.5);
       border-radius: calc(${fontSize} * 2); /* Adjusted border-radius */
       ${type === 'image' ? `background-image: url(${imageSrc}); width: calc(${fontSize} * 2); height: calc(${fontSize} * 2);` : ''}
+      ${style}
     `}
     on:click
   >
@@ -33,12 +36,12 @@
     }
   
     .button.primary {
-      background-color: #f88912;
+      background-color: #d16800;
       color: #fcfcfc;
     }
   
     .button.primary:hover {
-      background-color: #e07810;
+      background-color: #b85c00;
     }
   
     .button.secondary {
@@ -57,6 +60,16 @@
       background-repeat: no-repeat;
       border: 1px solid #212121;
       box-sizing: border-box;
+    }
+  
+    .button.primary.white {
+      background-color: #ffffff;
+      color: #212121;
+    }
+  
+    .button.primary.white:hover {
+      background-color: #f5f5f5;
+      color: #000000;
     }
   </style>
   
