@@ -2,10 +2,24 @@
   import { slide } from "svelte/transition";
   import Button from "$lib/Button.svelte";
   import { firebaseService } from "$lib/FirebaseService.svelte";
+  import { recordsService } from "$lib/RecordsService";
   import { onMount } from "svelte";
+  import RecordList from "$lib/components/RecordList.svelte";
+  import type { RecordListDto } from "$lib/dto/Record.dto";
+  import DifficultySelector from "$lib/components/DifficultySelector.svelte";
+  import { PuzzleDifficulty } from "$lib/Puzzle";
 
   let displayName: string | null = $state("");
   let showPasswordReset = $state(false);
+
+  let difficulties: PuzzleDifficulty[] = $state([
+    PuzzleDifficulty.Easy,
+    PuzzleDifficulty.Medium,
+    PuzzleDifficulty.Hard,
+  ]);
+  let selectedDifficulty: PuzzleDifficulty = $state(PuzzleDifficulty.Easy);
+
+  let recordsData: RecordListDto | null = $state(null);
 
   let user = {
     puzzleRecords: [
@@ -29,6 +43,10 @@
       passwordResetEmailSent = false;
     }, 10000);
   };
+
+  $effect(async () => {
+    recordsData = await recordsService.getRecords(selectedDifficulty);
+  });
 
   onMount(() => {
     if (!firebaseService.currentUser) return;
@@ -88,35 +106,11 @@
       </div>
     </div>
 
-    <div class="flex-1 pl-10">
-      <div class="bg-white rounded-3xl p-6 shadow-sm">
-        <h2 class="text-[45px] font-bold mb-5 text-center">
-          My records
-          <img
-            src="/images/Picture2.png"
-            alt="Trophy"
-            class="inline-block w-[41px] h-[41px] -mb-[6px] ml-1"
-          />
-        </h2>
-        <div class="space-y-4">
-          {#each user.puzzleRecords as record}
-            <div class="bg-white rounded-3xl p-4 px-6 shadow-sm">
-              <div class="flex items-center">
-                <span class="font-semibold text-xl flex-1">{record.name}</span>
-                <div class="w-px h-9 bg-gray-200 mx-6"></div>
-                <span class="font-semibold text-sm flex-1 text-right">
-                  {record.score}
-                  <img
-                    src="/images/Picture2.png"
-                    alt="Trophy"
-                    class="inline-block w-3.5 h-3.5 -mb-0.5 ml-0.5"
-                  />
-                </span>
-              </div>
-            </div>
-          {/each}
-        </div>
-      </div>
+    <div class="flex flex-col items-center w-full">
+      <DifficultySelector {difficulties} bind:selectedDifficulty />
+      {#if recordsData}
+        <RecordList {recordsData} />
+      {/if}
     </div>
   </div>
 </div>

@@ -25,7 +25,8 @@
 </script>
 
 <div
-  class="group grid grid-cols-12 gap-4 px-6 py-4 hover:bg-gray-50 transition-colors duration-200 items-center {leaderboardRow.rank === 1
+  class="group grid grid-cols-12 gap-4 px-6 py-4 hover:bg-gray-50 transition-colors duration-200 items-center {leaderboardRow.rank ===
+  1
     ? 'bg-gray-50'
     : ''}"
 >
@@ -55,11 +56,12 @@
   <div class="col-span-4 text-right">
     <span
       class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
-      {leaderboardRow.rank === 1 ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800'}
+      {leaderboardRow.rank === 1
+        ? 'bg-blue-100 text-blue-800'
+        : 'bg-gray-100 text-gray-800'}
       group-hover:bg-opacity-75 transition-colors duration-200"
     >
       {leaderboardRow.solving_time.toLocaleString()}
     </span>
   </div>
 </div>
-

@@ -30,7 +30,3 @@
     </button>
   {/each}
 </div>
-
-<style>
-  /* Any additional custom styles can go here */
-</style>
