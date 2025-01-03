@@ -23,8 +23,10 @@ class UserService {
   }
 
   async createUser(email: string) {
-    const user = new UserDto(emailToUsername(email), email);
+    const username = emailToUsername(email);
+    const user = new UserDto(username, email);
     const token = await firebaseService.getIdToken();
+    firebaseService.updateDisplayName(username);
     const url = `${this.baseUrl}/v1/user/create`;
 
     fetch(url, {

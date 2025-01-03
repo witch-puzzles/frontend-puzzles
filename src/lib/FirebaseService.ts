@@ -4,7 +4,9 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  updateProfile,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   type User,
   browserLocalPersistence,
   setPersistence
@@ -58,6 +60,32 @@ class FirebaseService {
           }
         }, 50);
       });
+    }
+  }
+
+  async resetPassword(email: string) {
+    try {
+      await sendPasswordResetEmail(this.auth, email, {
+        url: window.location.origin + '/login', // Redirect URL after password reset
+        handleCodeInApp: false // Use email link instead of handling in the app
+      });
+    } catch (error) {
+      this.handleError(error);
+      throw error;
+    }
+  }
+
+  async updateDisplayName(displayName: string) {
+    try {
+      if (!this.currentUser) {
+        throw new Error("No user is currently signed in");
+      }
+      await updateProfile(this.currentUser, {
+        displayName,
+      });
+    } catch (error) {
+      this.handleError(error);
+      throw error;
     }
   }
 
