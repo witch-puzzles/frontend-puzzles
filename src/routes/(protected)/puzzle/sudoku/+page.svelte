@@ -22,8 +22,9 @@
 
   let correctlySolved: boolean = $state(false);
 
+  const origin = window.location.hostname;
   let link = $derived(
-    `localhost:5173/puzzle/sudoku?puzzleId=${sudokuState.sudoku?.puzzle_id}`,
+    `${origin}/puzzle/sudoku?puzzleId=${sudokuState.sudoku?.puzzle_id}`,
   );
 
   const submit = async () => {
