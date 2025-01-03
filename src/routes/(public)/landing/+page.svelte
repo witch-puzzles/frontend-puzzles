@@ -1,6 +1,5 @@
 <script lang="ts">
   import Button from "$lib/Button.svelte";
-  import { goto } from "$app/navigation";
   import { onMount } from "svelte";
 
   let totalStars = $state(0);
@@ -43,13 +42,14 @@
     <h1 class="text-white text-4xl font-bold text-center mb-8">
       Challenge Your Mind<br />With Witch Puzzles
     </h1>
-    <Button
-      text="Start today"
-      type="primary"
-      variant="white"
-      fontSize="18px"
-      on:click={() => goto("/register")}
-    />
+    <a href="/register">
+      <Button
+        text="Start today"
+        type="primary"
+        variant="white"
+        fontSize="18px"
+      />
+    </a>
   </div>
 
   <!-- Features Section -->
