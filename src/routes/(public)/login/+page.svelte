@@ -1,6 +1,6 @@
 <script lang="ts">
   import Button from "$lib/Button.svelte";
-  import { firebaseService } from "$lib/FirebaseService";
+  import { firebaseService } from "$lib/FirebaseService.svelte";
   import { goto } from "$app/navigation";
 
   let emailInput = $state("");

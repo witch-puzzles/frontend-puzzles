@@ -1,6 +1,6 @@
 <script lang="ts">
   import Button from "$lib/Button.svelte";
-  import { firebaseService } from "$lib/FirebaseService";
+  import { firebaseService } from "$lib/FirebaseService.svelte";
   import { userService } from "$lib/UserService";
   import { goto } from "$app/navigation";
 

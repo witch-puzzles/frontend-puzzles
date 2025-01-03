@@ -1,11 +1,13 @@
 <script lang="ts">
   import { slide } from "svelte/transition";
   import Button from "$lib/Button.svelte";
-  import Icon from "$lib/components/Icon.svelte";
+  import { firebaseService } from "$lib/FirebaseService.svelte";
+  import { onMount } from "svelte";
 
-  // Mock user data - replace with actual user data later
+  let displayName: string | null = $state("");
+  let showPasswordReset = $state(false);
+
   let user = {
-    name: "Rumeysa",
     puzzleRecords: [
       { name: "Sudoku", score: 5075 },
       { name: "Other puzzle", score: 231 },
@@ -16,19 +18,32 @@
     avatar: "/images/Picture1.png",
   };
 
-  let oldPassword = "";
-  let newPassword = "";
-  let showPasswordReset = false;
+  let passwordResetEmailSent = $state(false);
+  const handlePasswordReset = async () => {
+    if (!firebaseService.currentUser) return;
+
+    await firebaseService.resetPassword(firebaseService.currentUser.email);
+
+    passwordResetEmailSent = true;
+    setInterval(() => {
+      passwordResetEmailSent = false;
+    }, 10000);
+  };
+
+  onMount(() => {
+    if (!firebaseService.currentUser) return;
+    displayName = firebaseService.currentUser.displayName;
+  });
 </script>
 
 <div class="max-w-[1200px] mx-auto mt-[76px] mb-10 px-5">
   <div class="flex gap-10">
-    <div class="flex-none w-[400px] border-r border-gray-200 pr-10">
+    <div class="flex-none w-[400px] pr-10">
       <div class="text-center">
         <div class="flex flex-col items-center gap-4">
           <img src={user.avatar} alt="Profile" class="w-48 h-48 rounded-full" />
           <div class="text-center">
-            <h1 class="text-[45px] font-bold m-0">{user.name}</h1>
+            <h1 class="text-[45px] font-bold m-0">{displayName}</h1>
           </div>
         </div>
 
@@ -39,33 +54,32 @@
               type="secondary"
               fontSize="24px"
               style="padding-left: 8px; padding-right: 8px;"
-              on:click={() => (showPasswordReset = !showPasswordReset)}
+              onclick={() => (showPasswordReset = !showPasswordReset)}
             />
 
             {#if showPasswordReset}
               <div class="w-full mt-6" transition:slide>
                 <div class="flex flex-col gap-4 w-full">
-                  <input
-                    type="password"
-                    bind:value={oldPassword}
-                    placeholder="Old password"
-                    class="p-3 border-4 border-black rounded-[14px] text-base font-semibold"
-                  />
-                  <input
-                    type="password"
-                    bind:value={newPassword}
-                    placeholder="New password"
-                    class="p-3 border-4 border-black rounded-[14px] text-base font-semibold"
-                  />
                   <div class="flex justify-center gap-4 mt-2">
-                    <Button text="Reset" type="primary" fontSize="16px" />
+                    <Button
+                      text="Reset"
+                      type="primary"
+                      fontSize="16px"
+                      onclick={handlePasswordReset}
+                    />
                     <Button
                       text="Cancel"
                       type="secondary"
                       fontSize="16px"
-                      on:click={() => (showPasswordReset = false)}
+                      onclick={() => (showPasswordReset = false)}
                     />
                   </div>
+                  {#if passwordResetEmailSent}
+                    <p class="font-bold text-green-600" transition:slide>
+                      An e-mail with instructions on how to reset your password
+                      has been sent to your registered address.
+                    </p>
+                  {/if}
                 </div>
               </div>
             {/if}
