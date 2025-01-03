@@ -3,19 +3,18 @@
   import Timer from "./Timer.svelte";
 
   interface Props {
-    time?: number; // in seconds
     submit: () => void;
     reset: () => void;
     shuffle: () => void;
   }
 
-  let { time = $bindable(0), submit, reset, shuffle }: Props = $props();
+  let { submit, reset, shuffle }: Props = $props();
 </script>
 
 <div
   class="flex flex-col justify-center items-center p-4 bg-orange-100 rounded-lg shadow-md border-2 border-orange-300"
 >
-  <Timer bind:seconds={time} />
+  <Timer />
   <div class="flex flex-row justify-around gap-3 m-2">
     <button
       onclick={() => submit()}
