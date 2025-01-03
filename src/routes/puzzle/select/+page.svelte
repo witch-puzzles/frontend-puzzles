@@ -5,7 +5,10 @@
   import type Puzzle from "$lib/Puzzle";
   import ContentBackgroundWrapper from "$lib/components/ContentBackgroundWrapper.svelte";
   import { goto } from "$app/navigation";
+  import { sudokuState } from "$lib/SudokuState.svelte";
+  import SudokuService from "$lib/SudokuService";
 
+  const sudokuService = new SudokuService();
   const puzzles = [new SudokuPuzzle()];
 
   let selectedPuzzle: Puzzle = $state(puzzles[0]);
@@ -15,12 +18,13 @@
   );
 
   const handleClickSolve = async () => {
-    const url = `http://localhost:3030/v1/sudoku/get/random/${selectedDifficulty}`;
-    console.log(url);
-    const res = await fetch(url).then((res) => res.json());
-    console.log(res);
-
-    goto("/puzzle/sudoku");
+    try {
+      const sudoku = await sudokuService.fetchRandomSudoku(selectedDifficulty);
+      sudokuState.sudoku = sudoku;
+      goto("/puzzle/sudoku");
+    } catch (err: any) {
+      console.error("Failed to fetch random sudoku: ", err);
+    }
   };
 </script>
 
