@@ -1,11 +1,23 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, connectAuthEmulator, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  type User,
+  browserLocalPersistence,
+  setPersistence
+} from "firebase/auth";
 
 class FirebaseService {
   private firebaseConfig;
   private app;
   private auth;
-  private emulatorUrl: string;
+
+  currentUser: User | null = null;
+  isLoading: boolean = true;
+  error: string | null = null;
 
   constructor() {
     this.firebaseConfig = {
@@ -21,17 +33,65 @@ class FirebaseService {
     this.app = initializeApp(this.firebaseConfig);
     this.auth = getAuth(this.app);
 
-    this.emulatorUrl = `http://localhost:${import.meta.env.VITE_AUTH_EMULATOR_PORT}`
-    // comment out the line below to connect to the real service
-    //connectAuthEmulator(this.auth, this.emulatorUrl);
+    // Set up local persistence
+    setPersistence(this.auth, browserLocalPersistence);
+
+    // Initialize auth state listener
+    this.initAuthStateListener();
+  }
+
+  private initAuthStateListener() {
+    onAuthStateChanged(this.auth, (user) => {
+      this.isLoading = true;
+      this.currentUser = user;
+      this.isLoading = false;
+    });
+  }
+
+  async waitForAuth(): Promise<void> {
+    if (this.isLoading) {
+      return new Promise<void>((resolve) => {
+        const checkLoading = setInterval(() => {
+          if (!this.isLoading) {
+            clearInterval(checkLoading);
+            resolve();
+          }
+        }, 50);
+      });
+    }
   }
 
   async createUserWithEmailAndPassword(email: string, password: string) {
-    return createUserWithEmailAndPassword(this.auth, email, password);
+    try {
+      return await createUserWithEmailAndPassword(this.auth, email, password);
+    } catch (error) {
+      this.handleError(error);
+      throw error;
+    }
   }
 
   async signInWithEmailAndPassword(email: string, password: string) {
-    return signInWithEmailAndPassword(this.auth, email, password);
+    try {
+      return await signInWithEmailAndPassword(this.auth, email, password);
+    } catch (error) {
+      this.handleError(error);
+      throw error;
+    }
+  }
+
+  async signOut() {
+    try {
+      await signOut(this.auth);
+      this.error = null;
+    } catch (error) {
+      this.handleError(error);
+      throw error;
+    }
+  }
+
+  private handleError(error: any) {
+    this.error = error.message;
+    console.error('Firebase Service Error:', error);
   }
 
   async getIdToken(): Promise<string> {
@@ -44,4 +104,4 @@ class FirebaseService {
 }
 
 const firebaseService = new FirebaseService();
-export { FirebaseService, firebaseService }
+export { FirebaseService, firebaseService };

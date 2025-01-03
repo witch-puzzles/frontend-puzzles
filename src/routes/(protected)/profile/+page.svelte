@@ -1,23 +1,23 @@
 <script lang="ts">
-  import { slide } from 'svelte/transition';
-  import Button from '../../lib/Button.svelte';
-  import Icon from '$lib/components/Icon.svelte';
+  import { slide } from "svelte/transition";
+  import Button from "$lib/Button.svelte";
+  import Icon from "$lib/components/Icon.svelte";
 
   // Mock user data - replace with actual user data later
   let user = {
-    name: 'Rumeysa',
+    name: "Rumeysa",
     puzzleRecords: [
-      { name: 'Sudoku', score: 5075 },
-      { name: 'Other puzzle', score: 231 },
-      { name: 'Other puzzle', score: 1200 },
-      { name: 'Other puzzle', score: 12000 },
-      { name: 'Other puzzle', score: 523 }
+      { name: "Sudoku", score: 5075 },
+      { name: "Other puzzle", score: 231 },
+      { name: "Other puzzle", score: 1200 },
+      { name: "Other puzzle", score: 12000 },
+      { name: "Other puzzle", score: 523 },
     ],
-    avatar: '/images/Picture1.png'
+    avatar: "/images/Picture1.png",
   };
 
-  let oldPassword = '';
-  let newPassword = '';
+  let oldPassword = "";
+  let newPassword = "";
   let showPasswordReset = false;
 </script>
 
@@ -34,36 +34,36 @@
 
         <div class="mt-4 p-4 bg-white rounded-3xl shadow-sm">
           <div class="flex flex-col items-center gap-0">
-            <Button 
-              text="Reset my Password" 
-              type="secondary" 
+            <Button
+              text="Reset my Password"
+              type="secondary"
               fontSize="24px"
               style="padding-left: 8px; padding-right: 8px;"
-              on:click={() => showPasswordReset = !showPasswordReset} 
+              on:click={() => (showPasswordReset = !showPasswordReset)}
             />
-            
+
             {#if showPasswordReset}
               <div class="w-full mt-6" transition:slide>
                 <div class="flex flex-col gap-4 w-full">
-                  <input 
-                    type="password" 
-                    bind:value={oldPassword} 
+                  <input
+                    type="password"
+                    bind:value={oldPassword}
                     placeholder="Old password"
                     class="p-3 border-4 border-black rounded-[14px] text-base font-semibold"
                   />
-                  <input 
-                    type="password" 
-                    bind:value={newPassword} 
+                  <input
+                    type="password"
+                    bind:value={newPassword}
                     placeholder="New password"
                     class="p-3 border-4 border-black rounded-[14px] text-base font-semibold"
                   />
                   <div class="flex justify-center gap-4 mt-2">
                     <Button text="Reset" type="primary" fontSize="16px" />
-                    <Button 
-                      text="Cancel" 
-                      type="secondary" 
-                      fontSize="16px" 
-                      on:click={() => showPasswordReset = false}
+                    <Button
+                      text="Cancel"
+                      type="secondary"
+                      fontSize="16px"
+                      on:click={() => (showPasswordReset = false)}
                     />
                   </div>
                 </div>
@@ -77,8 +77,12 @@
     <div class="flex-1 pl-10">
       <div class="bg-white rounded-3xl p-6 shadow-sm">
         <h2 class="text-[45px] font-bold mb-5 text-center">
-          My records 
-          <img src="/images/Picture2.png" alt="Trophy" class="inline-block w-[41px] h-[41px] -mb-[6px] ml-1" />
+          My records
+          <img
+            src="/images/Picture2.png"
+            alt="Trophy"
+            class="inline-block w-[41px] h-[41px] -mb-[6px] ml-1"
+          />
         </h2>
         <div class="space-y-4">
           {#each user.puzzleRecords as record}
@@ -87,11 +91,11 @@
                 <span class="font-semibold text-xl flex-1">{record.name}</span>
                 <div class="w-px h-9 bg-gray-200 mx-6"></div>
                 <span class="font-semibold text-sm flex-1 text-right">
-                  {record.score} 
-                  <img 
-                    src="/images/Picture2.png" 
-                    alt="Trophy" 
-                    class="inline-block w-3.5 h-3.5 -mb-0.5 ml-0.5" 
+                  {record.score}
+                  <img
+                    src="/images/Picture2.png"
+                    alt="Trophy"
+                    class="inline-block w-3.5 h-3.5 -mb-0.5 ml-0.5"
                   />
                 </span>
               </div>
