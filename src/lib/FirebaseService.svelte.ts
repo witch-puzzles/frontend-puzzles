@@ -7,6 +7,7 @@ import {
   updateProfile,
   onAuthStateChanged,
   sendPasswordResetEmail,
+  getAdditionalUserInfo,
   type User,
   browserLocalPersistence,
   setPersistence,
@@ -111,12 +112,13 @@ class FirebaseService {
     }
   }
 
-  async signInWithGoogle() {
+  async signInWithGoogle(): Promise<string | null | undefined> {
     try {
-      const user = await signInWithPopup(this.auth, this.googleAuthProvider);
-      return user;
+      const res = await signInWithPopup(this.auth, this.googleAuthProvider);
+      return res.user.email;
     } catch (err: any) {
       console.error("Could not sign in with Google", err);
+      return null;
     }
   }
 

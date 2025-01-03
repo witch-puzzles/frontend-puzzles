@@ -28,8 +28,12 @@
 
   const handleGoogleRegister = async () => {
     try {
-      const res = await firebaseService.signInWithGoogle();
-      console.log(res);
+      const email = await firebaseService.signInWithGoogle();
+      if (email) {
+        userService.createUser(emailInput);
+      }
+
+      goto("/puzzle/select");
     } catch (err: any) {
       console.error(err);
     }
