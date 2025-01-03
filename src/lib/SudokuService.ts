@@ -9,7 +9,7 @@ export default class SudokuService {
   private baseUrl: string;
 
   constructor() {
-    this.baseUrl = `http://localhost:3030`;
+    this.baseUrl = import.meta.env.VITE_BACKEND_URL;
   }
 
   serialize(values: string[]): string {
