@@ -48,6 +48,19 @@ class FirebaseService {
     });
   }
 
+  async waitForAuth(): Promise<void> {
+    if (this.isLoading) {
+      return new Promise<void>((resolve) => {
+        const checkLoading = setInterval(() => {
+          if (!this.isLoading) {
+            clearInterval(checkLoading);
+            resolve();
+          }
+        }, 50);
+      });
+    }
+  }
+
   async createUserWithEmailAndPassword(email: string, password: string) {
     try {
       return await createUserWithEmailAndPassword(this.auth, email, password);

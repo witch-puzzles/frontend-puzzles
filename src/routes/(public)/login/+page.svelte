@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Button from "../../lib/Button.svelte";
+  import Button from "$lib/Button.svelte";
   import { firebaseService } from "$lib/FirebaseService";
   import { goto } from "$app/navigation";
 
@@ -144,4 +144,3 @@
     height: 55px;
   }
 </style>
-
