@@ -14,7 +14,6 @@
   let values: string[] = $state([]);
   let initialValues: string[] = $state([]);
   let size: number = $state(1);
-  let time: number = $state(0); // in seconds
 
   let link = "https://google.com213123123122312312312313123312";
   let puzzleId = "utku-id-puzzle-123";
@@ -104,7 +103,7 @@
         </div>
       </div>
       <div class="h-full flex flex-col justify-around">
-        <PuzzleControls bind:time {submit} {reset} {shuffle} />
+        <PuzzleControls {submit} {reset} {shuffle} />
         <ShareMenu {link} {puzzleId} />
       </div>
     </div>

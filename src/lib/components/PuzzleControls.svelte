@@ -3,13 +3,12 @@
   import Timer from "./Timer.svelte";
 
   interface Props {
-    time?: number; // in seconds
     submit: () => void;
     reset: () => void;
     shuffle: () => void;
   }
 
-  let { time = $bindable(0), submit, reset, shuffle }: Props = $props();
+  let { submit, reset, shuffle }: Props = $props();
 </script>
 
 <div
