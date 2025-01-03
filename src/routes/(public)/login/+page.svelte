@@ -6,6 +6,8 @@
   let emailInput = $state("");
   let passwordInput = $state("");
 
+  let hasInvalidInput = $state(false);
+
   const handleLogin = async () => {
     try {
       const res = await firebaseService.signInWithEmailAndPassword(
@@ -13,9 +15,10 @@
         passwordInput,
       );
 
+      hasInvalidInput = false;
       goto("/puzzle/select");
     } catch (err: any) {
-      console.error("Error during login: ", err);
+      hasInvalidInput = true;
     }
   };
 </script>
@@ -24,16 +27,23 @@
   <div class="login-form">
     <h1>Log in</h1>
 
-    <div class="input-container">
-      <input bind:value={emailInput} type="email" placeholder="Email" />
-    </div>
+    <div class="flex flex-col">
+      <div class="input-container" class:invalid={hasInvalidInput}>
+        <input bind:value={emailInput} type="email" placeholder="Email" />
+      </div>
 
-    <div class="input-container">
-      <input
-        bind:value={passwordInput}
-        type="password"
-        placeholder="Password"
-      />
+      <div class="input-container" class:invalid={hasInvalidInput}>
+        <input
+          bind:value={passwordInput}
+          type="password"
+          placeholder="Password"
+        />
+      </div>
+      {#if hasInvalidInput}
+        <p class="font-bold text-red-600 text-2xl mb-4 mt-2">
+          Invalid login information, please try again.
+        </p>
+      {/if}
     </div>
 
     <div class="forgot-password">
@@ -57,7 +67,7 @@
   </div>
 </div>
 
-<style>
+<style long="postcss">
   .login-container {
     display: flex;
     flex-direction: column;
@@ -105,6 +115,10 @@
 
   .input-container input::placeholder {
     font-weight: 600;
+  }
+
+  .input-container.invalid input {
+    @apply border-red-500;
   }
 
   .forgot-password {

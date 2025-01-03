@@ -7,6 +7,8 @@
   let emailInput = $state("");
   let passwordInput = $state("");
 
+  let hasInvalidInput = $state(false);
+
   const handleRegister = async () => {
     try {
       const res = await firebaseService.createUserWithEmailAndPassword(
@@ -15,10 +17,12 @@
       );
 
       userService.createUser(emailInput);
+      hasInvalidInput = false;
 
       goto("/puzzle/select");
     } catch (err: any) {
-      console.error("Error during registration: ", err);
+      hasInvalidInput = true;
+      console.log(err);
     }
   };
 </script>
@@ -27,16 +31,23 @@
   <div class="register-form">
     <h1>Register</h1>
 
-    <div class="input-container">
-      <input bind:value={emailInput} type="email" placeholder="Email" />
-    </div>
+    <div class="flex flex-col">
+      <div class="input-container" class:invalid={hasInvalidInput}>
+        <input bind:value={emailInput} type="email" placeholder="Email" />
+      </div>
 
-    <div class="input-container">
-      <input
-        bind:value={passwordInput}
-        type="password"
-        placeholder="Password"
-      />
+      <div class="input-container" class:invalid={hasInvalidInput}>
+        <input
+          bind:value={passwordInput}
+          type="password"
+          placeholder="Password"
+        />
+      </div>
+      {#if hasInvalidInput}
+        <p class="font-bold text-red-600 text-2xl mb-4 mt-2">
+          Invalid registration information, please try again.
+        </p>
+      {/if}
     </div>
 
     <div class="register-button">
@@ -56,7 +67,7 @@
   </div>
 </div>
 
-<style>
+<style lang="postcss">
   .register-container {
     display: flex;
     flex-direction: column;
@@ -89,6 +100,9 @@
 
   .input-container {
     margin-bottom: 30px;
+  }
+  .input-container.invalid input {
+    @apply border-red-500;
   }
 
   .input-container input {
