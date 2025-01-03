@@ -23,7 +23,7 @@ class FirebaseService {
 
     this.emulatorUrl = `http://localhost:${import.meta.env.VITE_AUTH_EMULATOR_PORT}`
     // comment out the line below to connect to the real service
-    connectAuthEmulator(this.auth, this.emulatorUrl);
+    //connectAuthEmulator(this.auth, this.emulatorUrl);
   }
 
   async createUserWithEmailAndPassword(email: string, password: string) {
@@ -44,4 +44,4 @@ class FirebaseService {
 }
 
 const firebaseService = new FirebaseService();
-export { firebaseService }
+export { FirebaseService, firebaseService }

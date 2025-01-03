@@ -1,4 +1,5 @@
 import UserDto from "./dto/User.dto";
+import { firebaseService } from "./FirebaseService";
 
 const generateRandomFourDigitNumber = (): number => {
   return Math.floor(1000 + Math.random() * 9000);
@@ -22,12 +23,17 @@ class UserService {
   }
 
   async createUser(email: string) {
-    const url = `${this.baseUrl}/v1/user/create`;
     const user = new UserDto(emailToUsername(email), email);
-    console.log(user)
-    await fetch(url, {
-      method: "POST",
-      body: JSON.stringify(user),
+    const token = await firebaseService.getIdToken();
+    const url = `${this.baseUrl}/v1/user/create`;
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify(user)
     });
   }
 }
