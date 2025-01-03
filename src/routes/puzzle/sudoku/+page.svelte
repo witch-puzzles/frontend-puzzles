@@ -6,12 +6,15 @@
   import ContentBackgroundWrapper from "$lib/components/ContentBackgroundWrapper.svelte";
   import ShareMenu from "$lib/components/ShareMenu.svelte";
   import { PuzzleDifficulty } from "$lib/Puzzle";
+  import { restartTimer } from "$lib/TimerState.svelte";
+  import { onMount } from "svelte";
 
   const sudokuService = new SudokuService();
 
   let values: string[] = $state([]);
   let initialValues: string[] = $state([]);
   let size: number = $state(1);
+  let time: number = $state(0); // in seconds
 
   let link = "https://google.com213123123122312312312313123312";
   let puzzleId = "utku-id-puzzle-123";
@@ -28,6 +31,7 @@
   const shuffle = () => {
     if (sudokuState.sudoku) {
       getRandomSudoku(sudokuState.sudoku.difficulty);
+      restartTimer();
     }
   };
 
@@ -51,18 +55,14 @@
     values = Array.from(initialValues);
   };
 
-  let hasRun = false;
-
-  $effect(() => {
-    if (hasRun) return;
-
+  onMount(() => {
     if (!sudokuState.sudoku) {
       getRandomSudoku(PuzzleDifficulty.Easy); // get easy puzzle by default
     } else {
       syncSudoku();
     }
 
-    hasRun = true;
+    restartTimer();
   });
 </script>
 
@@ -100,7 +100,7 @@
         </div>
       </div>
       <div class="h-full flex flex-col justify-around">
-        <PuzzleControls {submit} {reset} {shuffle} />
+        <PuzzleControls bind:time {submit} {reset} {shuffle} />
         <ShareMenu {link} {puzzleId} />
       </div>
     </div>
