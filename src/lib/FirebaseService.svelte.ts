@@ -13,7 +13,6 @@ import {
   GoogleAuthProvider,
   signInWithPopup
 } from "firebase/auth";
-import firebase from "firebase/compat/app";
 
 class FirebaseService {
   private firebaseConfig;
@@ -39,8 +38,6 @@ class FirebaseService {
     this.app = initializeApp(this.firebaseConfig);
     this.auth = getAuth(this.app);
     this.googleAuthProvider = new GoogleAuthProvider();
-
-    this.signInWithGoogle();
 
     // Set up local persistence
     setPersistence(this.auth, browserLocalPersistence);
@@ -115,11 +112,12 @@ class FirebaseService {
   }
 
   async signInWithGoogle() {
-    signInWithPopup(this.auth, this.googleAuthProvider).then((result) => {
-      this.currentUser = result.user;
-    }).catch((error) => {
-      console.log("Could not sign in with popup");
-    })
+    try {
+      const user = await signInWithPopup(this.auth, this.googleAuthProvider);
+      return user;
+    } catch (err: any) {
+      console.error("Could not sign in with Google", err);
+    }
   }
 
   async signOut() {

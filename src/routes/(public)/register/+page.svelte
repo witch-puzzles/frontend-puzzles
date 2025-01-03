@@ -25,6 +25,15 @@
       console.log(err);
     }
   };
+
+  const handleGoogleRegister = async () => {
+    try {
+      const res = await firebaseService.signInWithGoogle();
+      console.log(res);
+    } catch (err: any) {
+      console.error(err);
+    }
+  };
 </script>
 
 <div class="register-container">
@@ -61,9 +70,9 @@
 
     <div class="divider">or continue with</div>
 
-    <div class="google-register">
+    <button onclick={handleGoogleRegister} class="google-register">
       <img src="/images/google_logo.png" alt="Google register" />
-    </div>
+    </button>
   </div>
 </div>
 
