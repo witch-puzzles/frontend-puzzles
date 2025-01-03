@@ -6,8 +6,8 @@
   import ContentBackgroundWrapper from "$lib/components/ContentBackgroundWrapper.svelte";
   import ShareMenu from "$lib/components/ShareMenu.svelte";
   import { PuzzleDifficulty } from "$lib/Puzzle";
-  import { restartTimer } from "$lib/TimerState.svelte";
-  import { onMount } from "svelte";
+  import { restartTimer, resetTimer } from "$lib/TimerState.svelte";
+  import { onMount, onDestroy } from "svelte";
 
   const sudokuService = new SudokuService();
 
@@ -63,6 +63,10 @@
     }
 
     restartTimer();
+  });
+
+  onDestroy(() => {
+    resetTimer();
   });
 </script>
 
