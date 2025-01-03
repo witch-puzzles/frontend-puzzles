@@ -38,7 +38,7 @@
 
 <div class="max-w-[1200px] mx-auto mt-[76px] mb-10 px-5">
   <div class="flex gap-10">
-    <div class="flex-none w-[400px] border-r border-gray-200 pr-10">
+    <div class="flex-none w-[400px] pr-10">
       <div class="text-center">
         <div class="flex flex-col items-center gap-4">
           <img src={user.avatar} alt="Profile" class="w-48 h-48 rounded-full" />
