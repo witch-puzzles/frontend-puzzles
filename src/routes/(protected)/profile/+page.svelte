@@ -8,9 +8,13 @@
   import type { RecordListDto } from "$lib/dto/Record.dto";
   import DifficultySelector from "$lib/components/DifficultySelector.svelte";
   import { PuzzleDifficulty } from "$lib/Puzzle";
+  import { userService } from "$lib/UserService";
+  import { Computer, Icon } from "lucide-svelte";
 
   let displayName: string | null = $state("");
   let showPasswordReset = $state(false);
+
+  let isAdmin = $state(false);
 
   let difficulties: PuzzleDifficulty[] = $state([
     PuzzleDifficulty.Easy,
@@ -48,9 +52,11 @@
     recordsData = await recordsService.getRecords(selectedDifficulty);
   });
 
-  onMount(() => {
+  onMount(async () => {
     if (!firebaseService.currentUser) return;
     displayName = firebaseService.currentUser.displayName;
+
+    isAdmin = await userService.amIAdmin();
   });
 </script>
 
@@ -102,6 +108,14 @@
             {/if}
           </div>
         </div>
+        {#if isAdmin}
+          {@const Icon = Computer}
+          <a href="/admin">
+            <div class="w-fit h-fit">
+              <Icon class="inline-block" size={20}></Icon>
+            </div>
+          </a>
+        {/if}
       </div>
     </div>
 
