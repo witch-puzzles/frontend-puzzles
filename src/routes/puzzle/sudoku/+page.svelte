@@ -6,8 +6,14 @@
   import ContentBackgroundWrapper from "$lib/components/ContentBackgroundWrapper.svelte";
   import ShareMenu from "$lib/components/ShareMenu.svelte";
   import { PuzzleDifficulty } from "$lib/Puzzle";
-  import { restartTimer, resetTimer } from "$lib/TimerState.svelte";
+  import {
+    restartTimer,
+    resetTimer,
+    timerState,
+    stopTimer,
+  } from "$lib/TimerState.svelte";
   import { onMount, onDestroy } from "svelte";
+  import CongratsMenu from "$lib/components/CongratsMenu.svelte";
 
   const sudokuService = new SudokuService();
 
@@ -15,12 +21,27 @@
   let initialValues: string[] = $state([]);
   let size: number = $state(1);
 
+  let correctlySolved: boolean = $state(false);
+
   let link = "https://google.com213123123122312312312313123312";
   let puzzleId = "utku-id-puzzle-123";
   // TODO: replace by fetched ID & link
 
-  const submit = () => {
-    console.log("Submit puzzle...");
+  const submit = async () => {
+    if (!sudokuState.sudoku) return;
+
+    const isCorrect = await sudokuService.submitSudoku(
+      sudokuState.sudoku.puzzle_id,
+      timerState.time,
+      values,
+      true,
+    );
+
+    if (isCorrect) {
+      console.log("YTAY");
+      stopTimer();
+      correctlySolved = true;
+    }
   };
 
   const reset = () => {
@@ -103,7 +124,11 @@
         </div>
       </div>
       <div class="h-full flex flex-col justify-around">
-        <PuzzleControls {submit} {reset} {shuffle} />
+        {#if correctlySolved}
+          <CongratsMenu />
+        {:else}
+          <PuzzleControls {submit} {reset} {shuffle} />
+        {/if}
         <ShareMenu {link} {puzzleId} />
       </div>
     </div>
