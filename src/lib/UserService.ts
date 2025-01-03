@@ -38,6 +38,20 @@ class UserService {
       body: JSON.stringify(user)
     });
   }
+
+  async amIAdmin(): Promise<boolean> {
+    const token = await firebaseService.getIdToken();
+    const url = `${this.baseUrl}/v1/user/amiadmin`;
+    const res = await fetch(url, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+    }).then(res => res.json());
+
+    return res;
+  }
 }
 
 const userService = new UserService();
