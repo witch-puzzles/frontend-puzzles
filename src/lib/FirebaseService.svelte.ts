@@ -7,15 +7,19 @@ import {
   updateProfile,
   onAuthStateChanged,
   sendPasswordResetEmail,
+  getAdditionalUserInfo,
   type User,
   browserLocalPersistence,
-  setPersistence
+  setPersistence,
+  GoogleAuthProvider,
+  signInWithPopup
 } from "firebase/auth";
 
 class FirebaseService {
   private firebaseConfig;
   private app;
   private auth;
+  private googleAuthProvider;
 
   currentUser: User | null = $state(null);
   isLoading: boolean = $state(true);
@@ -34,6 +38,7 @@ class FirebaseService {
 
     this.app = initializeApp(this.firebaseConfig);
     this.auth = getAuth(this.app);
+    this.googleAuthProvider = new GoogleAuthProvider();
 
     // Set up local persistence
     setPersistence(this.auth, browserLocalPersistence);
@@ -104,6 +109,16 @@ class FirebaseService {
     } catch (error) {
       this.handleError(error);
       throw error;
+    }
+  }
+
+  async signInWithGoogle(): Promise<string | null | undefined> {
+    try {
+      const res = await signInWithPopup(this.auth, this.googleAuthProvider);
+      return res.user.email;
+    } catch (err: any) {
+      console.error("Could not sign in with Google", err);
+      return null;
     }
   }
 
