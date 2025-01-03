@@ -32,6 +32,8 @@
         return leaderboardService.getLeaderboardMonth(selectedDifficulty);
       case "all":
         return leaderboardService.getLeaderboardAllTime(selectedDifficulty);
+      default:
+        throw new Error("Invalid time period");
     }
   };
 
@@ -45,8 +47,8 @@
   });
 </script>
 
-<div class="flex flex-col items-center gap-8">
-  <h3 class="font-bold text-4xl my-4">Sudoku Leaderboard</h3>
+<div class="flex flex-col items-center gap-6">
+  <h3 class="font-bold text-4xl mt-4">Sudoku Leaderboard</h3>
   <DifficultySelector {difficulties} bind:selectedDifficulty />
   <TimeSelector bind:selected={selectedTime} />
   <!-- if leaderboardAllTime is not null, then -->

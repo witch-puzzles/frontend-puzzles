@@ -23,17 +23,25 @@
   <div class="buttons">
     {#if isLoggedIn}
       <a href="/leaderboard">
-        <Button text="Leaderboard" type="primary" />
+        <p class="px-4 py-2 rounded-2xl bg-[#FAA347] hover:bg-[#F88F1F] transition-colors duration-200">
+          Leaderboard
+        </p>
       </a>
       <a href="/profile">
-        <Button type="image" imageSrc="/images/placeholder.png" />
+        <p class="px-4 py-2 rounded-2xl bg-[#F88F1F] hover:bg-[#FAA347] transition-colors duration-200">
+          Profile
+        </p>      
       </a>
     {:else}
       <a href="/login">
-        <Button text="Login" type="secondary" />
+        <p class="px-4 py-2 rounded-2xl bg-[#FAA347] hover:bg-[#F88F1F] transition-colors duration-200">
+          Login
+        </p>
       </a>
       <a href="/register">
-        <Button text="Get Started" type="primary" />
+        <p class="px-4 py-2 rounded-2xl bg-[#F88F1F] hover:bg-[#FAA347] transition-colors duration-200">
+          Sign Up
+        </p>
       </a>
     {/if}
   </div>
@@ -58,11 +66,6 @@
     height: 48px;
     width: auto;
     margin-right: 0px;
-  }
-  .logo span {
-    font-size: 18px;
-    font-weight: 600;
-    color: #212121;
   }
   .buttons {
     display: flex;

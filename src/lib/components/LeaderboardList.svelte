@@ -10,11 +10,11 @@
   let { leaderboardData }: Props = $props();
 </script>
 
-<div class="max-w-3xl mx-auto p-6">
+<div class="max-w-3xl mx-auto">
   <div class="bg-white rounded-lg shadow-lg overflow-hidden">
     <!-- Header -->
     <div
-      class="bg-gray-50 border-b border-gray-200 px-6 py-3 grid grid-cols-12 gap-4 text-sm font-semibold text-gray-600"
+      class="bg-gray-50 border-b border-gray-200 px-6 py-3 grid grid-cols-12 gap-12 text-sm font-semibold text-gray-600"
     >
       <div class="col-span-2 text-center">Rank</div>
       <div class="col-span-6">Player</div>

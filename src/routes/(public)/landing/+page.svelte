@@ -43,22 +43,19 @@
       Challenge Your Mind<br />With Witch Puzzles
     </h1>
     <a href="/register">
-      <Button
-        text="Start today"
-        type="primary"
-        variant="white"
-        fontSize="18px"
-      />
+      <p class="py-2 px-4 rounded-2xl bg-white text-lg hover:bg-zinc-100 transition-colors duration-200">
+        Start today
+      </p>
     </a>
   </div>
 
   <!-- Features Section -->
   <div
-    class="flex bg-white justify-between px-16 w-full gap-12 h-[calc(90vh-92px-30vh)] overflow-hidden"
+    class="flex lg:flex-row flex-col bg-white justify-between px-16 w-full gap-12 h-[calc(90vh-92px-30vh)] overflow-hidden"
   >
     <div class="flex-1 flex flex-col items-center justify-center gap-4">
       <h2 class="text-3xl font-bold text-center text-[#212121]">
-        Choose from our large repertoire of puzzles
+        Our repertoire is expanding, stay tuned!
       </h2>
       <div class="bg-[#f5f5f5] p-3 rounded-xl flex justify-center items-center">
         <img
@@ -77,40 +74,37 @@
         <div class="flex items-end gap-3 p-3">
           <!-- Second Place -->
           <div class="flex flex-col items-center gap-0.5">
-            <img src="" alt="Player avatar" class="w-10 h-10 rounded-full" />
-            <span class="font-semibold text-xs mb-2">X-fredd5</span>
+            <span class="font-semibold text-xs mb-2">Arthur35</span>
             <div
               class="flex flex-col items-center justify-end px-3 py-1.5 rounded-xl bg-[#e0e0e0] w-[60px] text-center"
               style="height: {calculateHeight(320)}px"
             >
               <span class="text-lg font-bold w-full">2</span>
-              <span class="text-[10px] w-full">320 pts</span>
+              <span class="text-[10px] w-full">7.574sec</span>
             </div>
           </div>
 
           <!-- First Place -->
           <div class="flex flex-col items-center gap-0.5">
-            <img src="" alt="Player avatar" class="w-10 h-10 rounded-full" />
             <span class="font-semibold text-xs mb-2">Antonio12</span>
             <div
               class="flex flex-col items-center justify-end px-3 py-1.5 rounded-xl bg-[#ffd700] w-[60px] text-center"
               style="height: {calculateHeight(420)}px"
             >
               <span class="text-lg font-bold w-full">1</span>
-              <span class="text-[10px] w-full">420 pts</span>
+              <span class="text-[10px] w-full">4.152sec</span>
             </div>
           </div>
 
           <!-- Third Place -->
           <div class="flex flex-col items-center gap-0.5">
-            <img src="" alt="Player avatar" class="w-10 h-10 rounded-full" />
             <span class="font-semibold text-xs mb-2">Lucas123</span>
             <div
               class="flex flex-col items-center justify-end px-3 py-1.5 rounded-xl bg-[#f88912] w-[60px] text-center"
               style="height: {calculateHeight(5)}px"
             >
               <span class="text-lg font-bold w-full">3</span>
-              <span class="text-[10px] w-full">5 pts</span>
+              <span class="text-[10px] w-full">12.629sec</span>
             </div>
           </div>
         </div>
@@ -124,7 +118,7 @@
       class="flex flex-col items-center justify-center max-w-[1200px] w-full"
     >
       <div class="flex items-center justify-center gap-8 w-full">
-        <h2 class="text-3xl font-bold text-white m-0">2025 Witch Puzzles</h2>
+        <h2 class="text-xl font-bold text-white m-0">2025 Witch Puzzles</h2>
         <a
           href="https://github.com/witch-puzzles"
           target="_blank"
@@ -134,7 +128,7 @@
             <div class="text-base">⭐</div>
             <div class="text-base font-bold">{totalStars}</div>
           </div>
-          <div class="text-[10px] opacity-80">Total Stars</div>
+          <div class="text-[10px] opacity-80">Stargazers</div>
         </a>
       </div>
     </div>
