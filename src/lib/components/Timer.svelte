@@ -2,13 +2,10 @@
   import { timerState } from "$lib/TimerState.svelte";
 
   function formatTime(totalSeconds: number) {
-    const hours = Math.floor(totalSeconds / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
     const secs = totalSeconds % 60;
 
-    return [hours, minutes, secs]
-      .map((v) => v.toString().padStart(2, "0"))
-      .join(":");
+    return `${minutes.toString().padStart(2, "0")}:${secs.toFixed(1).padStart(3, "0")}`;
   }
 </script>
 

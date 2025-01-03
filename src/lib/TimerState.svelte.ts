@@ -9,8 +9,8 @@ const timerState: TimerState = $state({ time: 0, isRunning: false, intervalId: n
 const startTimer = () => {
   if (!timerState.isRunning) {
     timerState.intervalId = setInterval(() => {
-      timerState.time++;
-    }, 1000);
+      timerState.time += 0.1;
+    }, 100);
     timerState.isRunning = true;
   }
 }
