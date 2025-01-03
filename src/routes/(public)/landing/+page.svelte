@@ -77,11 +77,7 @@
         <div class="flex items-end gap-3 p-3">
           <!-- Second Place -->
           <div class="flex flex-col items-center gap-0.5">
-            <img
-              src="/images/avatars/x-fredd5.png"
-              alt="Player avatar"
-              class="w-10 h-10 rounded-full"
-            />
+            <img src="" alt="Player avatar" class="w-10 h-10 rounded-full" />
             <span class="font-semibold text-xs mb-2">X-fredd5</span>
             <div
               class="flex flex-col items-center justify-end px-3 py-1.5 rounded-xl bg-[#e0e0e0] w-[60px] text-center"
@@ -94,11 +90,7 @@
 
           <!-- First Place -->
           <div class="flex flex-col items-center gap-0.5">
-            <img
-              src="/images/avatars/antonio12.png"
-              alt="Player avatar"
-              class="w-10 h-10 rounded-full"
-            />
+            <img src="" alt="Player avatar" class="w-10 h-10 rounded-full" />
             <span class="font-semibold text-xs mb-2">Antonio12</span>
             <div
               class="flex flex-col items-center justify-end px-3 py-1.5 rounded-xl bg-[#ffd700] w-[60px] text-center"
@@ -111,11 +103,7 @@
 
           <!-- Third Place -->
           <div class="flex flex-col items-center gap-0.5">
-            <img
-              src="/images/avatars/lucas123.png"
-              alt="Player avatar"
-              class="w-10 h-10 rounded-full"
-            />
+            <img src="" alt="Player avatar" class="w-10 h-10 rounded-full" />
             <span class="font-semibold text-xs mb-2">Lucas123</span>
             <div
               class="flex flex-col items-center justify-end px-3 py-1.5 rounded-xl bg-[#f88912] w-[60px] text-center"
