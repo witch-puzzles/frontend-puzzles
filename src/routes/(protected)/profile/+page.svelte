@@ -1,6 +1,5 @@
 <script lang="ts">
   import { slide } from "svelte/transition";
-  import Button from "$lib/Button.svelte";
   import { firebaseService } from "$lib/FirebaseService.svelte";
   import { recordsService } from "$lib/RecordsService";
   import { onMount } from "svelte";
@@ -10,6 +9,7 @@
   import { PuzzleDifficulty } from "$lib/Puzzle";
   import { userService } from "$lib/UserService";
   import { Computer, Icon } from "lucide-svelte";
+  import { goto } from "$app/navigation";
 
   let displayName: string | null = $state("");
   let showPasswordReset = $state(false);
@@ -25,15 +25,12 @@
 
   let recordsData: RecordListDto | null = $state(null);
 
-  let user = {
-    puzzleRecords: [
-      { name: "Sudoku", score: 5075 },
-      { name: "Other puzzle", score: 231 },
-      { name: "Other puzzle", score: 1200 },
-      { name: "Other puzzle", score: 12000 },
-      { name: "Other puzzle", score: 523 },
-    ],
-    avatar: "/profile_picture.png",
+  const handleSignOut = async () => {
+    if (!firebaseService.currentUser) return;
+
+    await firebaseService.signOut();
+
+    goto("/landing");
   };
 
   let passwordResetEmailSent = $state(false);
@@ -65,7 +62,11 @@
     <div class="flex-none w-[400px] pr-10">
       <div class="text-center">
         <div class="flex flex-col items-center gap-4">
-          <img src={user.avatar} alt="Profile" class="w-48 h-48 rounded-full" />
+          <img
+            src="/profile_picture.png"
+            alt="Profile"
+            class="w-48 h-48 rounded-full"
+          />
           <div class="text-center">
             <h1 class="text-2xl font-bold m-0">{displayName}</h1>
           </div>
@@ -106,6 +107,11 @@
                 </div>
               </div>
             {/if}
+            <button
+              onclick={handleSignOut}
+              class="outline-none focus:outline-none px-2 font-bold text-zinc-700 hover:text-red-600 transition-colors duration-200"
+              >Sign Out</button
+            >
           </div>
         </div>
         {#if isAdmin}
