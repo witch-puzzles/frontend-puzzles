@@ -9,13 +9,17 @@ import {
   sendPasswordResetEmail,
   type User,
   browserLocalPersistence,
-  setPersistence
+  setPersistence,
+  GoogleAuthProvider,
+  signInWithPopup
 } from "firebase/auth";
+import firebase from "firebase/compat/app";
 
 class FirebaseService {
   private firebaseConfig;
   private app;
   private auth;
+  private googleAuthProvider;
 
   currentUser: User | null = $state(null);
   isLoading: boolean = $state(true);
@@ -34,6 +38,9 @@ class FirebaseService {
 
     this.app = initializeApp(this.firebaseConfig);
     this.auth = getAuth(this.app);
+    this.googleAuthProvider = new GoogleAuthProvider();
+
+    this.signInWithGoogle();
 
     // Set up local persistence
     setPersistence(this.auth, browserLocalPersistence);
@@ -105,6 +112,14 @@ class FirebaseService {
       this.handleError(error);
       throw error;
     }
+  }
+
+  async signInWithGoogle() {
+    signInWithPopup(this.auth, this.googleAuthProvider).then((result) => {
+      this.currentUser = result.user;
+    }).catch((error) => {
+      console.log("Could not sign in with popup");
+    })
   }
 
   async signOut() {
