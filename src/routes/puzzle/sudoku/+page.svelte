@@ -1,14 +1,13 @@
 <script lang="ts">
   import SudokuGrid from "$lib/components/SudokuGrid.svelte";
-  import Icon from "$lib/components/Icon.svelte";
+  import { sudokuState } from "$lib/SudokuState.svelte";
   import PuzzleControls from "$lib/components/PuzzleControls.svelte";
   import SudokuService from "$lib/SudokuService";
   import ContentBackgroundWrapper from "$lib/components/ContentBackgroundWrapper.svelte";
   import ShareMenu from "$lib/components/ShareMenu.svelte";
+  import { PuzzleDifficulty } from "$lib/Puzzle";
 
   const sudokuService = new SudokuService();
-  const exampleSerialSudoku =
-    "3:6,0,0,0,0,0,0,0,0,0,7,5,0,0,0,0,8,9,0,0,0,0,8,9,1,0,0,0,0,1,7,5,0,0,0,0,0,0,0,0,0,6,0,9,0,4,0,0,0,0,0,0,0,0,0,0,0,5,0,4,2,6,0,5,3,0,0,0,0,0,0,0,0,0,8,0,1,0,0,0,0";
 
   let values: string[] = $state([]);
   let initialValues: string[] = $state([]);
@@ -23,12 +22,33 @@
   };
 
   const reset = () => {
-    console.log("Reset puzzle...");
     values = Array.from(initialValues);
   };
 
   const shuffle = () => {
-    console.log("Shuffle puzzle...");
+    if (sudokuState.sudoku) {
+      getRandomSudoku(sudokuState.sudoku.difficulty);
+    }
+  };
+
+  const getRandomSudoku = async (difficulty: PuzzleDifficulty) => {
+    try {
+      const sudoku = await sudokuService.fetchRandomSudoku(difficulty);
+      sudokuState.sudoku = sudoku;
+      syncSudoku();
+    } catch (err: any) {
+      console.error("Failed to fetch random sudoku: ", err);
+    }
+  };
+
+  const syncSudoku = () => {
+    if (!sudokuState.sudoku) return;
+
+    [size, initialValues] = sudokuService.deserialize(
+      sudokuState.sudoku.puzzle_data,
+    );
+
+    values = Array.from(initialValues);
   };
 
   let hasRun = false;
@@ -36,14 +56,11 @@
   $effect(() => {
     if (hasRun) return;
 
-    [size, initialValues] = sudokuService.deserialize(exampleSerialSudoku);
-    values = Array.from(initialValues);
-    console.log(initialValues);
-
-    let serial = sudokuService.serialize(values);
-
-    console.log(serial);
-    console.log(serial === exampleSerialSudoku);
+    if (!sudokuState.sudoku) {
+      getRandomSudoku(PuzzleDifficulty.Easy); // get easy puzzle by default
+    } else {
+      syncSudoku();
+    }
 
     hasRun = true;
   });
