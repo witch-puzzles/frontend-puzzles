@@ -1,9 +1,15 @@
 <script lang="ts">
   import { slide } from "svelte/transition";
   import Button from "$lib/Button.svelte";
-  import Icon from "$lib/components/Icon.svelte";
+  import { firebaseService } from "$lib/FirebaseService";
+  import { onMount } from "svelte";
 
-  // Mock user data - replace with actual user data later
+  let displayName: string | null = $state("");
+  onMount(() => {
+    if (!firebaseService.currentUser) return;
+    displayName = firebaseService.currentUser.displayName;
+  });
+
   let user = {
     name: "Rumeysa",
     puzzleRecords: [
@@ -16,9 +22,9 @@
     avatar: "/images/Picture1.png",
   };
 
-  let oldPassword = "";
-  let newPassword = "";
-  let showPasswordReset = false;
+  let oldPassword = $state("");
+  let newPassword = $state("");
+  let showPasswordReset = $state(false);
 </script>
 
 <div class="max-w-[1200px] mx-auto mt-[76px] mb-10 px-5">
@@ -28,7 +34,7 @@
         <div class="flex flex-col items-center gap-4">
           <img src={user.avatar} alt="Profile" class="w-48 h-48 rounded-full" />
           <div class="text-center">
-            <h1 class="text-[45px] font-bold m-0">{user.name}</h1>
+            <h1 class="text-[45px] font-bold m-0">{displayName}</h1>
           </div>
         </div>
 
@@ -39,7 +45,7 @@
               type="secondary"
               fontSize="24px"
               style="padding-left: 8px; padding-right: 8px;"
-              on:click={() => (showPasswordReset = !showPasswordReset)}
+              onclick={() => (showPasswordReset = !showPasswordReset)}
             />
 
             {#if showPasswordReset}
@@ -63,7 +69,7 @@
                       text="Cancel"
                       type="secondary"
                       fontSize="16px"
-                      on:click={() => (showPasswordReset = false)}
+                      onclick={() => (showPasswordReset = false)}
                     />
                   </div>
                 </div>

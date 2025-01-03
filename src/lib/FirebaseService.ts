@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  updateProfile,
   onAuthStateChanged,
   type User,
   browserLocalPersistence,
@@ -58,6 +59,20 @@ class FirebaseService {
           }
         }, 50);
       });
+    }
+  }
+
+  async updateDisplayName(displayName: string) {
+    try {
+      if (!this.currentUser) {
+        throw new Error("No user is currently signed in");
+      }
+      await updateProfile(this.currentUser, {
+        displayName,
+      });
+    } catch (error) {
+      this.handleError(error);
+      throw error;
     }
   }
 
