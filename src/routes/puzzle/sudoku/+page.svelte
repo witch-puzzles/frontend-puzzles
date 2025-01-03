@@ -1,10 +1,11 @@
 <script lang="ts">
   import SudokuGrid from "$lib/components/SudokuGrid.svelte";
-  import Icon from "$lib/components/Icon.svelte";
+  import { sudokuState } from "$lib/SudokuState.svelte";
   import PuzzleControls from "$lib/components/PuzzleControls.svelte";
   import SudokuService from "$lib/SudokuService";
   import ContentBackgroundWrapper from "$lib/components/ContentBackgroundWrapper.svelte";
   import ShareMenu from "$lib/components/ShareMenu.svelte";
+  import { PuzzleDifficulty } from "$lib/Puzzle";
 
   const sudokuService = new SudokuService();
   const exampleSerialSudoku =
@@ -33,17 +34,26 @@
 
   let hasRun = false;
 
+  const getRandomSudoku = async () => {
+    try {
+      const sudoku = await sudokuService.fetchRandomSudoku(
+        PuzzleDifficulty.Easy,
+      );
+      sudokuState.sudoku = sudoku;
+    } catch (err: any) {
+      console.error("Failed to fetch random sudoku: ", err);
+    }
+  };
+
   $effect(() => {
     if (hasRun) return;
 
-    [size, initialValues] = sudokuService.deserialize(exampleSerialSudoku);
+    if (!sudokuState.sudoku) return;
+
+    [size, initialValues] = sudokuService.deserialize(
+      sudokuState.sudoku.puzzle_data,
+    );
     values = Array.from(initialValues);
-    console.log(initialValues);
-
-    let serial = sudokuService.serialize(values);
-
-    console.log(serial);
-    console.log(serial === exampleSerialSudoku);
 
     hasRun = true;
   });
