@@ -1,7 +1,7 @@
 <script lang="ts">
   import { slide } from "svelte/transition";
   import Button from "$lib/Button.svelte";
-  import { firebaseService } from "$lib/FirebaseService";
+  import { firebaseService } from "$lib/FirebaseService.svelte";
   import { onMount } from "svelte";
 
   let displayName: string | null = $state("");

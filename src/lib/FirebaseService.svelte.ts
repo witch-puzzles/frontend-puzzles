@@ -17,9 +17,9 @@ class FirebaseService {
   private app;
   private auth;
 
-  currentUser: User | null = null;
-  isLoading: boolean = true;
-  error: string | null = null;
+  currentUser: User | null = $state(null);
+  isLoading: boolean = $state(true);
+  error: string | null = $state(null);
 
   constructor() {
     this.firebaseConfig = {

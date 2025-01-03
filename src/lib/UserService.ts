@@ -1,5 +1,5 @@
 import UserDto from "./dto/User.dto";
-import { firebaseService } from "./FirebaseService";
+import { firebaseService } from "./FirebaseService.svelte";
 
 const generateRandomFourDigitNumber = (): number => {
   return Math.floor(1000 + Math.random() * 9000);

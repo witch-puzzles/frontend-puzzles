@@ -1,6 +1,6 @@
 import type SudokuDto from "./dto/Sudoku.dto";
 import type { PuzzleDifficulty } from "./Puzzle";
-import { firebaseService } from "$lib/FirebaseService";
+import { firebaseService } from "$lib/FirebaseService.svelte";
 import SudokuSubmitDto from "./dto/SudokuSubmit.dto";
 
 export default class SudokuService {

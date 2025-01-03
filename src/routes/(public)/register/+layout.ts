@@ -1,7 +1,7 @@
 import { browser } from '$app/environment';
 import { redirect } from '@sveltejs/kit';
 import type { LayoutLoad } from './$types';
-import { firebaseService } from '$lib/FirebaseService';
+import { firebaseService } from '$lib/FirebaseService.svelte';
 
 export const load: LayoutLoad = async () => {
   if (!browser) return {};
