@@ -10,29 +10,27 @@
 </script>
 
 <div class="topbar">
-  <div class="logo" on:click={() => goto("/landing")} style="cursor: pointer;">
-    <img src="/images/WitchPuzzleLogo.png" alt="WithPuzzles Logo" />
-  </div>
+  <a href="/landing">
+    <div class="logo" style="cursor: pointer;">
+      <img src="/images/WitchPuzzleLogo.png" alt="WithPuzzles Logo" />
+    </div>
+  </a>
 
   <div class="buttons">
     {#if isLoggedIn}
-      <Button
-        text="Leaderboard"
-        type="primary"
-        on:click={() => goto("/leaderboard")}
-      />
-      <Button
-        type="image"
-        imageSrc="/images/placeholder.png"
-        on:click={() => goto("/profile")}
-      />
+      <a href="/leaderboard">
+        <Button text="Leaderboard" type="primary" />
+      </a>
+      <a href="/profile">
+        <Button type="image" imageSrc="/images/placeholder.png" />
+      </a>
     {:else}
-      <Button text="Login" type="secondary" on:click={() => goto("/login")} />
-      <Button
-        text="Get Started"
-        type="primary"
-        on:click={() => goto("/register")}
-      />
+      <a href="/login">
+        <Button text="Login" type="secondary" />
+      </a>
+      <a href="/register">
+        <Button text="Get Started" type="primary" />
+      </a>
     {/if}
   </div>
 </div>
@@ -68,4 +66,3 @@
     margin-right: 30px;
   }
 </style>
-
