@@ -1,13 +1,13 @@
 <script lang="ts">
-  import LeaderboardEntry from "$lib/LeaderboardEntry";
   import LeaderboardCard from "./LeaderboardCard.svelte";
+  import { LeaderboardDto } from "$lib/dto/Leaderboard.dto";
   import { slide } from "svelte/transition";
 
   interface Props {
-    entries: LeaderboardEntry[];
+    leaderboardData: LeaderboardDto;
   }
 
-  let { entries }: Props = $props();
+  let { leaderboardData }: Props = $props();
 </script>
 
 <div class="max-w-3xl mx-auto p-6">
@@ -25,9 +25,9 @@
     <div
       class="divide-y divide-gray-200 max-h-[30rem] overflow-y-auto custom-scrollbar"
     >
-      {#each entries as entry, i (entry.position)}
+      {#each leaderboardData.leaderboard as leaderboardRow}
         <div transition:slide|local={{ duration: 150 }}>
-          <LeaderboardCard {entry} isTop={i < 3} />
+          <LeaderboardCard leaderboardRow={leaderboardRow} />
         </div>
       {/each}
     </div>

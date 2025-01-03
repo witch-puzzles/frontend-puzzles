@@ -1,13 +1,12 @@
 <script lang="ts">
-  import LeaderboardEntry from "$lib/LeaderboardEntry";
+  import { LeaderboardRegistryDto } from "$lib/dto/Leaderboard.dto";
   import { Medal, Trophy, Award } from "lucide-svelte";
 
   interface Props {
-    entry: LeaderboardEntry;
-    isTop: boolean;
+    leaderboardRow: LeaderboardRegistryDto;
   }
 
-  let { entry, isTop }: Props = $props();
+  let { leaderboardRow }: Props = $props();
 
   const getRankIcon = (position: number) => {
     switch (position) {
@@ -22,11 +21,11 @@
     }
   };
 
-  const rankIcon = getRankIcon(entry.position);
+  const rankIcon = getRankIcon(leaderboardRow.rank);
 </script>
 
 <div
-  class="group grid grid-cols-12 gap-4 px-6 py-4 hover:bg-gray-50 transition-colors duration-200 items-center {isTop
+  class="group grid grid-cols-12 gap-4 px-6 py-4 hover:bg-gray-50 transition-colors duration-200 items-center {leaderboardRow.rank === 1
     ? 'bg-gray-50'
     : ''}"
 >
@@ -35,31 +34,31 @@
     {#if rankIcon}
       {@const Icon = rankIcon}
       <Icon
-        class="inline-block {entry.position === 1
+        class="inline-block {leaderboardRow.rank === 1
           ? 'text-yellow-500'
-          : entry.position === 2
+          : leaderboardRow.rank === 2
             ? 'text-gray-400'
             : 'text-amber-600'}"
         size={20}
       />
     {:else}
-      <span class="text-gray-600 font-medium">{entry.position}</span>
+      <span class="text-gray-600 font-medium">{leaderboardRow.rank}</span>
     {/if}
   </div>
 
   <!-- Player Name -->
   <div class="col-span-6">
-    <span class="font-medium text-gray-900">{entry.name}</span>
+    <span class="font-medium text-gray-900">{leaderboardRow.user_name}</span>
   </div>
 
   <!-- Score -->
   <div class="col-span-4 text-right">
     <span
       class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
-      {isTop ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800'}
+      {leaderboardRow.rank === 1 ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800'}
       group-hover:bg-opacity-75 transition-colors duration-200"
     >
-      {entry.score.toLocaleString()}
+      {leaderboardRow.solving_time.toLocaleString()}
     </span>
   </div>
 </div>

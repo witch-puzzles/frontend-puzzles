@@ -1,8 +1,13 @@
 <script lang="ts">
   import DifficultySelector from "$lib/components/DifficultySelector.svelte";
   import LeaderboardList from "$lib/components/LeaderboardList.svelte";
-  import LeaderboardEntry from "$lib/LeaderboardEntry";
   import { PuzzleDifficulty } from "$lib/Puzzle";
+  import LeaderboardService from "$lib/LeaderboardService";
+  import { LeaderboardDto } from "$lib/dto/Leaderboard.dto";
+  import { onMount } from "svelte";
+  import TimeSelector from "$lib/components/TimeSelector.svelte";
+
+  const leaderboardService = new LeaderboardService();
 
   let difficulties: PuzzleDifficulty[] = $state([
     PuzzleDifficulty.Easy,
@@ -11,24 +16,41 @@
   ]);
   let selectedDifficulty: PuzzleDifficulty = $state(PuzzleDifficulty.Easy);
 
-  let entries: LeaderboardEntry[] = $state([
-    new LeaderboardEntry("Utku", 1, 1389),
-    new LeaderboardEntry("Husamin", 2, 1028),
-    new LeaderboardEntry("R2-D2", 3, 780),
-    new LeaderboardEntry("R2-D2", 4, 780),
-    new LeaderboardEntry("R2-D2", 5, 780),
-    new LeaderboardEntry("R2-D2", 6, 780),
-    new LeaderboardEntry("R2-D2", 7, 780),
-    new LeaderboardEntry("R2-D2", 8, 780),
-    new LeaderboardEntry("R2-D2", 9, 780),
-    new LeaderboardEntry("R2-D2", 10, 780),
-    new LeaderboardEntry("R2-D2", 11, 780),
-    new LeaderboardEntry("R2-D2", 12, 780),
-  ]);
+  let selectedTime: string = $state("today");
+
+  let leaderboardData: LeaderboardDto | null = $state(null);
+
+  const selectLeaderboardByTime = async (
+    periodId: string,
+  ): Promise<LeaderboardDto> => {
+    switch (periodId) {
+      case "today":
+        return leaderboardService.getLeaderboardToday(selectedDifficulty);
+      case "week":
+        return leaderboardService.getLeaderboardWeek(selectedDifficulty);
+      case "month":
+        return leaderboardService.getLeaderboardMonth(selectedDifficulty);
+      case "all":
+        return leaderboardService.getLeaderboardAllTime(selectedDifficulty);
+    }
+  };
+
+  $effect(async () => {
+    leaderboardData = await selectLeaderboardByTime(selectedTime);
+  });
+
+  onMount(async () => {
+    leaderboardData =
+      await leaderboardService.getLeaderboardToday(selectedDifficulty);
+  });
 </script>
 
 <div class="flex flex-col items-center gap-8">
-  <h3 class="mdc-typography--headline3">Sudoku Leaderboard</h3>
+  <h3 class="font-bold text-4xl my-4">Sudoku Leaderboard</h3>
   <DifficultySelector {difficulties} bind:selectedDifficulty />
-  <LeaderboardList {entries} />
+  <TimeSelector bind:selected={selectedTime} />
+  <!-- if leaderboardAllTime is not null, then -->
+  {#if leaderboardData}
+    <LeaderboardList {leaderboardData} />
+  {/if}
 </div>
