@@ -15,7 +15,7 @@
 <div
   class="flex flex-col justify-center items-center p-4 bg-orange-100 rounded-lg shadow-md border-2 border-orange-300"
 >
-  <Timer bind:seconds={time} />
+  <Timer />
   <div class="flex flex-row justify-around gap-3 m-2">
     <button
       onclick={() => submit()}
