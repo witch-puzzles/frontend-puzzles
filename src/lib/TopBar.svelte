@@ -1,12 +1,18 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
+  import { onMount } from "svelte";
   import Button from "./Button.svelte";
+  import { firebaseService } from "./FirebaseService";
 
   interface Props {
     isLoggedIn: boolean;
   }
 
   let { isLoggedIn = false }: Props = $props();
+
+  onMount(() => {
+    isLoggedIn = firebaseService.currentUser !== null;
+  });
 </script>
 
 <div class="topbar">
