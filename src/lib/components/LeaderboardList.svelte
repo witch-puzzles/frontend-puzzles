@@ -27,7 +27,7 @@
     >
       {#each leaderboardData.leaderboard as leaderboardRow}
         <div transition:slide|local={{ duration: 150 }}>
-          <LeaderboardCard leaderboardRow={leaderboardRow} />
+          <LeaderboardCard {leaderboardRow} />
         </div>
       {/each}
     </div>
@@ -51,4 +51,3 @@
     @apply bg-gray-300 rounded-full hover:bg-gray-400 transition-colors;
   }
 </style>
-
