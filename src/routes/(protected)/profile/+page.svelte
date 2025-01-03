@@ -29,7 +29,7 @@
       { name: "Other puzzle", score: 12000 },
       { name: "Other puzzle", score: 523 },
     ],
-    avatar: "/images/Picture1.png",
+    avatar: "/profile_picture.png",
   };
 
   let passwordResetEmailSent = $state(false);
@@ -61,36 +61,35 @@
         <div class="flex flex-col items-center gap-4">
           <img src={user.avatar} alt="Profile" class="w-48 h-48 rounded-full" />
           <div class="text-center">
-            <h1 class="text-[45px] font-bold m-0">{displayName}</h1>
+            <h1 class="text-2xl font-bold m-0">{displayName}</h1>
           </div>
         </div>
 
         <div class="mt-4 p-4 bg-white rounded-3xl shadow-sm">
           <div class="flex flex-col items-center gap-0">
-            <Button
-              text="Reset my Password"
-              type="secondary"
-              fontSize="24px"
-              style="padding-left: 8px; padding-right: 8px;"
+            <button
+              class="outline-none focus:outline-none font-bold text-zinc-700 hover:text-green-600 transition-colors duration-200"
               onclick={() => (showPasswordReset = !showPasswordReset)}
-            />
+            >
+              Reset my password
+            </button>
 
             {#if showPasswordReset}
               <div class="w-full mt-6" transition:slide>
                 <div class="flex flex-col gap-4 w-full">
                   <div class="flex justify-center gap-4 mt-2">
-                    <Button
-                      text="Reset"
-                      type="primary"
-                      fontSize="16px"
+                    <button
+                      class="outline-none focus:outline-none px-2 font-bold text-zinc-700 hover:text-green-600 transition-colors duration-200"
                       onclick={handlePasswordReset}
-                    />
-                    <Button
-                      text="Cancel"
-                      type="secondary"
-                      fontSize="16px"
+                    >
+                      Reset
+                    </button>
+                    <button
+                      class="outline-none focus:outline-none px-2 font-bold text-zinc-700 hover:text-red-600 transition-colors duration-200"
                       onclick={() => (showPasswordReset = false)}
-                    />
+                    >
+                      Cancel
+                    </button>
                   </div>
                   {#if passwordResetEmailSent}
                     <p class="font-bold text-green-600" transition:slide>

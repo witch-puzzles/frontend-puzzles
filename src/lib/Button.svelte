@@ -3,10 +3,10 @@
     text: string;
     type: string;
     variant: string;
-    imageSrc: string;
+    imageSrc: string | undefined;
     fontSize: string;
-    style: string;
-    onclick: any;
+    style: string | undefined;
+    onclick: any | undefined;
   }
   let {
     text,

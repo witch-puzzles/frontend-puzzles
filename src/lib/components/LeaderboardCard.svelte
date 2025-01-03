@@ -61,7 +61,7 @@
         : 'bg-gray-100 text-gray-800'}
       group-hover:bg-opacity-75 transition-colors duration-200"
     >
-      {leaderboardRow.solving_time.toLocaleString()}
+      {leaderboardRow.solving_time.toLocaleString() + " sec"}
     </span>
   </div>
 </div>
