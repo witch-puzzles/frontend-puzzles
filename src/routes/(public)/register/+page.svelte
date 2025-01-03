@@ -1,7 +1,8 @@
 <script lang="ts">
-  import Button from "../../lib/Button.svelte";
-  import { firebaseService } from "$lib/FirebaseService";
+  import Button from "$lib/Button.svelte";
+  import { firebaseService } from "$lib/FirebaseService.svelte";
   import { userService } from "$lib/UserService";
+  import { goto } from "$app/navigation";
 
   let emailInput = $state("");
   let passwordInput = $state("");
@@ -14,6 +15,8 @@
       );
 
       userService.createUser(emailInput);
+
+      goto("/puzzle/select");
     } catch (err: any) {
       console.error("Error during registration: ", err);
     }
@@ -123,4 +126,3 @@
     height: 55px;
   }
 </style>
-

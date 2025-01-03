@@ -1,6 +1,5 @@
 <script lang="ts">
-  import Button from "../../lib/Button.svelte";
-  import { goto } from "$app/navigation";
+  import Button from "$lib/Button.svelte";
   import { onMount } from "svelte";
 
   let totalStars = $state(0);
@@ -16,13 +15,13 @@
 
   onMount(async () => {
     try {
-      const BACKEND_URL = "https://api.github.com/repos/witch-puzzles/backend-puzzles";
-      const FRONTEND_URL = "https://api.github.com/repos/witch-puzzles/frontend-puzzles";
+      const BACKEND_URL =
+        "https://api.github.com/repos/witch-puzzles/backend-puzzles";
+      const FRONTEND_URL =
+        "https://api.github.com/repos/witch-puzzles/frontend-puzzles";
       const [frontendResponse, backendResponse] = await Promise.all([
-        fetch(BACKEND_URL, {
-        }),
-        fetch(FRONTEND_URL, {
-        }),
+        fetch(BACKEND_URL, {}),
+        fetch(FRONTEND_URL, {}),
       ]);
 
       const [frontendData, backendData] = await Promise.all([
@@ -43,13 +42,14 @@
     <h1 class="text-white text-4xl font-bold text-center mb-8">
       Challenge Your Mind<br />With Witch Puzzles
     </h1>
-    <Button
-      text="Start today"
-      type="primary"
-      variant="white"
-      fontSize="18px"
-      on:click={() => goto("/register")}
-    />
+    <a href="/register">
+      <Button
+        text="Start today"
+        type="primary"
+        variant="white"
+        fontSize="18px"
+      />
+    </a>
   </div>
 
   <!-- Features Section -->
