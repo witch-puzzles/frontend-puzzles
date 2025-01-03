@@ -2,7 +2,7 @@
   import SudokuGrid from "$lib/components/SudokuGrid.svelte";
   import { sudokuState } from "$lib/SudokuState.svelte";
   import PuzzleControls from "$lib/components/PuzzleControls.svelte";
-  import SudokuService from "$lib/SudokuService";
+  import { sudokuService } from "$lib/SudokuService";
   import ContentBackgroundWrapper from "$lib/components/ContentBackgroundWrapper.svelte";
   import ShareMenu from "$lib/components/ShareMenu.svelte";
   import { PuzzleDifficulty } from "$lib/Puzzle";
@@ -14,8 +14,7 @@
   } from "$lib/TimerState.svelte";
   import { onMount, onDestroy } from "svelte";
   import CongratsMenu from "$lib/components/CongratsMenu.svelte";
-
-  const sudokuService = new SudokuService();
+  import { page } from "$app/stores";
 
   let values: string[] = $state([]);
   let initialValues: string[] = $state([]);
@@ -23,9 +22,9 @@
 
   let correctlySolved: boolean = $state(false);
 
-  let link = "https://google.com213123123122312312312313123312";
-  let puzzleId = "utku-id-puzzle-123";
-  // TODO: replace by fetched ID & link
+  let link = $derived(
+    `localhost:5173/puzzle/sudoku?puzzleId=${sudokuState.sudoku?.puzzle_id}`,
+  );
 
   const submit = async () => {
     if (!sudokuState.sudoku) return;
@@ -34,11 +33,10 @@
       sudokuState.sudoku.puzzle_id,
       timerState.time,
       values,
-      true,
+      sudokuState.is_applicable,
     );
 
     if (isCorrect) {
-      console.log("YTAY");
       stopTimer();
       correctlySolved = true;
     }
@@ -51,6 +49,7 @@
   const shuffle = () => {
     if (sudokuState.sudoku) {
       getRandomSudoku(sudokuState.sudoku.difficulty);
+      sudokuState.is_applicable = true;
       restartTimer();
     }
   };
@@ -75,11 +74,28 @@
     values = Array.from(initialValues);
   };
 
-  onMount(() => {
-    if (!sudokuState.sudoku) {
-      getRandomSudoku(PuzzleDifficulty.Easy); // get easy puzzle by default
-    } else {
+  onMount(async () => {
+    let queryPuzzleId = $page.url.searchParams.get("puzzleId");
+    if (queryPuzzleId) {
+      // through shared link - not applicable
+      try {
+        const sudoku = await sudokuService.fetchSudokuById(queryPuzzleId);
+        sudokuState.sudoku = sudoku;
+        sudokuState.is_applicable = false;
+        syncSudoku();
+      } catch (err: any) {
+        // most likely malformed id, go default route
+        getRandomSudoku(PuzzleDifficulty.Easy); // get easy puzzle by default
+        sudokuState.is_applicable = true;
+      }
+    } else if (sudokuState.sudoku) {
+      // through /puzzle/select - applicable
       syncSudoku();
+      sudokuState.is_applicable = true;
+    } else {
+      // directly - applicable
+      getRandomSudoku(PuzzleDifficulty.Easy); // get easy puzzle by default
+      sudokuState.is_applicable = true;
     }
 
     restartTimer();
@@ -129,7 +145,9 @@
         {:else}
           <PuzzleControls {submit} {reset} {shuffle} />
         {/if}
-        <ShareMenu {link} {puzzleId} />
+        {#if sudokuState.sudoku}
+          <ShareMenu {link} puzzleId={sudokuState.sudoku.puzzle_id} />
+        {/if}
       </div>
     </div>
   </ContentBackgroundWrapper>

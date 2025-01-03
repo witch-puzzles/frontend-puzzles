@@ -5,7 +5,7 @@
     const minutes = Math.floor((totalSeconds % 3600) / 60);
     const secs = totalSeconds % 60;
 
-    return `${minutes.toString().padStart(2, "0")}:${secs.toFixed(1)}`;
+    return `${minutes.toString().padStart(2, "0")}:${secs.toFixed(1).padStart(3, "0")}`;
   }
 </script>
 
