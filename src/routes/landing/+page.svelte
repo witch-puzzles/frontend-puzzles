@@ -16,17 +16,12 @@
 
   onMount(async () => {
     try {
-      const headers = {
-        Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
-        Accept: "application/vnd.github.v3+json",
-      };
-
+      const BACKEND_URL = "https://api.github.com/repos/witch-puzzles/backend-puzzles";
+      const FRONTEND_URL = "https://api.github.com/repos/witch-puzzles/frontend-puzzles";
       const [frontendResponse, backendResponse] = await Promise.all([
-        fetch("https://api.github.com/repos/witch-puzzles/frontend-puzzles", {
-          headers,
+        fetch(BACKEND_URL, {
         }),
-        fetch("https://api.github.com/repos/witch-puzzles/backend-puzzles", {
-          headers,
+        fetch(FRONTEND_URL, {
         }),
       ]);
 
