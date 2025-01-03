@@ -5,6 +5,7 @@
   import LeaderboardService from "$lib/LeaderboardService";
   import { LeaderboardDto } from "$lib/dto/Leaderboard.dto";
   import { onMount } from "svelte";
+  import TimeSelector from "$lib/components/TimeSelector.svelte";
 
   const leaderboardService = new LeaderboardService();
 
@@ -15,25 +16,41 @@
   ]);
   let selectedDifficulty: PuzzleDifficulty = $state(PuzzleDifficulty.Easy);
 
-  let leaderboardToday: LeaderboardDto | null = $state(null);
-  let leaderboardWeek: LeaderboardDto | null = $state(null);
-  let leaderboardMonth: LeaderboardDto | null = $state(null);
-  let leaderboardAllTime: LeaderboardDto | null = $state(null);
+  let selectedTime: string = $state("today");
 
-  onMount(async () => {
-    leaderboardToday = await leaderboardService.getLeaderboardToday(selectedDifficulty);
-    leaderboardWeek = await leaderboardService.getLeaderboardWeek(selectedDifficulty);
-    leaderboardMonth = await leaderboardService.getLeaderboardMonth(selectedDifficulty);
-    leaderboardAllTime = await leaderboardService.getLeaderboardAllTime(selectedDifficulty);
+  let leaderboardData: LeaderboardDto | null = $state(null);
+
+  const selectLeaderboardByTime = async (
+    periodId: string,
+  ): Promise<LeaderboardDto> => {
+    switch (periodId) {
+      case "today":
+        return leaderboardService.getLeaderboardToday(selectedDifficulty);
+      case "week":
+        return leaderboardService.getLeaderboardWeek(selectedDifficulty);
+      case "month":
+        return leaderboardService.getLeaderboardMonth(selectedDifficulty);
+      case "all":
+        return leaderboardService.getLeaderboardAllTime(selectedDifficulty);
+    }
+  };
+
+  $effect(async () => {
+    leaderboardData = await selectLeaderboardByTime(selectedTime);
   });
 
+  onMount(async () => {
+    leaderboardData =
+      await leaderboardService.getLeaderboardToday(selectedDifficulty);
+  });
 </script>
 
 <div class="flex flex-col items-center gap-8">
-  <h3 class="mdc-typography--headline3">Sudoku Leaderboard</h3>
+  <h3 class="font-bold text-4xl my-4">Sudoku Leaderboard</h3>
   <DifficultySelector {difficulties} bind:selectedDifficulty />
+  <TimeSelector bind:selected={selectedTime} />
   <!-- if leaderboardAllTime is not null, then -->
-  {#if leaderboardAllTime}
-    <LeaderboardList leaderboardData={leaderboardAllTime} />
+  {#if leaderboardData}
+    <LeaderboardList {leaderboardData} />
   {/if}
 </div>

@@ -1,5 +1,5 @@
 import { LeaderboardDto, LeaderboardRegistryDto } from "./dto/Leaderboard.dto";
-import { firebaseService } from "./FirebaseService";
+import { firebaseService } from "./FirebaseService.svelte";
 
 export default class LeaderboardService {
 
@@ -34,8 +34,8 @@ export default class LeaderboardService {
 
   async getLeaderboardWeek(difficulty: number): Promise<LeaderboardDto> {
     const headers = await this.getHeaders();
-    const url = `${this.baseUrl}/v1/sudoku_registry/leaderboard/${difficulty}/week`;    
-    const response = await fetch(url, { headers});
+    const url = `${this.baseUrl}/v1/sudoku_registry/leaderboard/${difficulty}/week`;
+    const response = await fetch(url, { headers });
     const responseData = await response.json();
     return responseData as LeaderboardDto;
   }
