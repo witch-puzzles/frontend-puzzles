@@ -19,13 +19,20 @@ const stopTimer = () => {
   if (timerState.intervalId) {
     clearInterval(timerState.intervalId);
     timerState.isRunning = false;
+  }
+}
+
+const resetTimer = () => {
+  if (timerState.intervalId) {
+    clearInterval(timerState.intervalId);
+    timerState.isRunning = false;
     timerState.time = 0;
   }
 }
 
 const restartTimer = () => {
-  stopTimer();
+  resetTimer();
   startTimer();
 }
 
-export { timerState, startTimer, stopTimer, restartTimer };
+export { timerState, startTimer, stopTimer, resetTimer, restartTimer };
