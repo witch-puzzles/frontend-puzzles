@@ -55,6 +55,12 @@ export default class SudokuService {
     return res as SudokuDto;
   }
 
+  async fetchSudokuById(id: string): Promise<SudokuDto> {
+    const url = `${this.baseUrl}/v1/sudoku/get/${id}`;
+    const res = await fetch(url).then((res) => res.json());
+    return res as SudokuDto;
+  }
+
   async submitSudoku(puzzle_id: string, solving_time: number, values: string[], is_applicable: boolean): Promise<boolean> {
     const url = `${this.baseUrl}/v1/sudoku_registry/submit`;
     const token = await firebaseService.getIdToken();
@@ -72,3 +78,5 @@ export default class SudokuService {
     return res.is_correct;
   }
 }
+
+export const sudokuService = new SudokuService();
