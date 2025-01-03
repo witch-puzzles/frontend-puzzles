@@ -6,10 +6,9 @@
   import ContentBackgroundWrapper from "$lib/components/ContentBackgroundWrapper.svelte";
   import ShareMenu from "$lib/components/ShareMenu.svelte";
   import { PuzzleDifficulty } from "$lib/Puzzle";
+  import type SudokuDto from "$lib/dto/Sudoku.dto";
 
   const sudokuService = new SudokuService();
-  const exampleSerialSudoku =
-    "3:6,0,0,0,0,0,0,0,0,0,7,5,0,0,0,0,8,9,0,0,0,0,8,9,1,0,0,0,0,1,7,5,0,0,0,0,0,0,0,0,0,6,0,9,0,4,0,0,0,0,0,0,0,0,0,0,0,5,0,4,2,6,0,5,3,0,0,0,0,0,0,0,0,0,8,0,1,0,0,0,0";
 
   let values: string[] = $state([]);
   let initialValues: string[] = $state([]);
@@ -29,32 +28,36 @@
   };
 
   const shuffle = () => {
-    console.log("Shuffle puzzle...");
+    if (sudokuState.sudoku) {
+      getRandomSudoku(sudokuState.sudoku.difficulty);
+      hasRun = false;
+    }
   };
 
-  let hasRun = false;
-
-  const getRandomSudoku = async () => {
+  const getRandomSudoku = async (difficulty: PuzzleDifficulty) => {
     try {
-      const sudoku = await sudokuService.fetchRandomSudoku(
-        PuzzleDifficulty.Easy,
-      );
+      const sudoku = await sudokuService.fetchRandomSudoku(difficulty);
       sudokuState.sudoku = sudoku;
+      syncSudoku();
     } catch (err: any) {
       console.error("Failed to fetch random sudoku: ", err);
     }
   };
 
-  $effect(() => {
-    if (hasRun) return;
-
+  const syncSudoku = () => {
     if (!sudokuState.sudoku) return;
-
     [size, initialValues] = sudokuService.deserialize(
       sudokuState.sudoku.puzzle_data,
     );
-    values = Array.from(initialValues);
 
+    values = Array.from(initialValues);
+  };
+
+  let hasRun = false;
+
+  $effect(() => {
+    if (hasRun) return;
+    syncSudoku();
     hasRun = true;
   });
 </script>
