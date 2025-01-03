@@ -6,7 +6,6 @@
   import ContentBackgroundWrapper from "$lib/components/ContentBackgroundWrapper.svelte";
   import ShareMenu from "$lib/components/ShareMenu.svelte";
   import { PuzzleDifficulty } from "$lib/Puzzle";
-  import type SudokuDto from "$lib/dto/Sudoku.dto";
 
   const sudokuService = new SudokuService();
 
@@ -23,14 +22,12 @@
   };
 
   const reset = () => {
-    console.log("Reset puzzle...");
     values = Array.from(initialValues);
   };
 
   const shuffle = () => {
     if (sudokuState.sudoku) {
       getRandomSudoku(sudokuState.sudoku.difficulty);
-      hasRun = false;
     }
   };
 
@@ -46,6 +43,7 @@
 
   const syncSudoku = () => {
     if (!sudokuState.sudoku) return;
+
     [size, initialValues] = sudokuService.deserialize(
       sudokuState.sudoku.puzzle_data,
     );
@@ -57,7 +55,13 @@
 
   $effect(() => {
     if (hasRun) return;
-    syncSudoku();
+
+    if (!sudokuState.sudoku) {
+      getRandomSudoku(PuzzleDifficulty.Easy); // get easy puzzle by default
+    } else {
+      syncSudoku();
+    }
+
     hasRun = true;
   });
 </script>
