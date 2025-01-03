@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, connectAuthEmulator, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
-export default class FirebaseService {
+class FirebaseService {
   private firebaseConfig;
   private app;
   private auth;
@@ -42,3 +42,6 @@ export default class FirebaseService {
     throw new Error("User is not authenticated!");
   }
 }
+
+const firebaseService = new FirebaseService();
+export { firebaseService }
