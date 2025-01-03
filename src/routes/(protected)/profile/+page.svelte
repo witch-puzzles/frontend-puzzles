@@ -5,13 +5,9 @@
   import { onMount } from "svelte";
 
   let displayName: string | null = $state("");
-  onMount(() => {
-    if (!firebaseService.currentUser) return;
-    displayName = firebaseService.currentUser.displayName;
-  });
+  let showPasswordReset = $state(false);
 
   let user = {
-    name: "Rumeysa",
     puzzleRecords: [
       { name: "Sudoku", score: 5075 },
       { name: "Other puzzle", score: 231 },
@@ -22,9 +18,22 @@
     avatar: "/images/Picture1.png",
   };
 
-  let oldPassword = $state("");
-  let newPassword = $state("");
-  let showPasswordReset = $state(false);
+  let passwordResetEmailSent = $state(false);
+  const handlePasswordReset = async () => {
+    if (!firebaseService.currentUser) return;
+
+    await firebaseService.resetPassword(firebaseService.currentUser.email);
+
+    passwordResetEmailSent = true;
+    setInterval(() => {
+      passwordResetEmailSent = false;
+    }, 10000);
+  };
+
+  onMount(() => {
+    if (!firebaseService.currentUser) return;
+    displayName = firebaseService.currentUser.displayName;
+  });
 </script>
 
 <div class="max-w-[1200px] mx-auto mt-[76px] mb-10 px-5">
@@ -51,20 +60,13 @@
             {#if showPasswordReset}
               <div class="w-full mt-6" transition:slide>
                 <div class="flex flex-col gap-4 w-full">
-                  <input
-                    type="password"
-                    bind:value={oldPassword}
-                    placeholder="Old password"
-                    class="p-3 border-4 border-black rounded-[14px] text-base font-semibold"
-                  />
-                  <input
-                    type="password"
-                    bind:value={newPassword}
-                    placeholder="New password"
-                    class="p-3 border-4 border-black rounded-[14px] text-base font-semibold"
-                  />
                   <div class="flex justify-center gap-4 mt-2">
-                    <Button text="Reset" type="primary" fontSize="16px" />
+                    <Button
+                      text="Reset"
+                      type="primary"
+                      fontSize="16px"
+                      onclick={handlePasswordReset}
+                    />
                     <Button
                       text="Cancel"
                       type="secondary"
@@ -72,6 +74,12 @@
                       onclick={() => (showPasswordReset = false)}
                     />
                   </div>
+                  {#if passwordResetEmailSent}
+                    <p class="font-bold text-green-600" transition:slide>
+                      An e-mail with instructions on how to reset your password
+                      has been sent to your registered address.
+                    </p>
+                  {/if}
                 </div>
               </div>
             {/if}
