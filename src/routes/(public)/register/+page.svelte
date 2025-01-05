@@ -74,8 +74,10 @@
 
     <div class="divider">or continue with</div>
 
-    <button onclick={handleGoogleRegister} class="google-register">
-      <img src="/images/google_logo.png" alt="Google register" />
+    <button onclick={handleGoogleRegister}>
+      <div class="google-register">
+        <img src="/images/google_logo.png" alt="Google register" />
+      </div>
     </button>
   </div>
 </div>

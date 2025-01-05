@@ -21,6 +21,16 @@
       hasInvalidInput = true;
     }
   };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const email = await firebaseService.signInWithGoogle();
+
+      goto("/puzzle/select");
+    } catch (err: any) {
+      console.error(err);
+    }
+  };
 </script>
 
 <div class="login-container">
@@ -61,9 +71,11 @@
 
     <div class="divider">or continue with</div>
 
-    <div class="google-login">
-      <img src="/images/google_logo.png" alt="Google Login" />
-    </div>
+    <button onclick={handleGoogleLogin}>
+      <div class="google-login">
+        <img src="/images/google_logo.png" alt="Google Login" />
+      </div>
+    </button>
   </div>
 </div>
 
